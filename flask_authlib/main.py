@@ -81,6 +81,8 @@ class Auth(object):
         self.__create_tables()
         # Setting bcrypt and login_manager for current app
         self.bcrypt, self.login_manager = self.__get()
+        # Setting Auth Alert Messages
+        self.__set_alerts()
         # Login view: auth -> login_form
         self.login_manager.login_view = 'auth.login_form'
         # Alert message category
@@ -96,6 +98,17 @@ class Auth(object):
         login_manager = LoginManager(self.app)
 
         return bcrypt, login_manager
+
+    def __set_alerts(self):
+        # Alert messages
+        self.ALERTS = get_alerts()
+
+        self.EMAIL_ALERT = self.ALERTS['EMAIL_ALERT']
+        self.USERNAME_ALERT = self.ALERTS['USERNAME_ALERT']
+        self.PASSWORD_LENGTH = self.ALERTS['PASSWORD_LENGTH']
+        self.REGISTER_SUCCESS = self.ALERTS['REGISTER_SUCCESS']
+
+        self.LOGIN_FAIL = self.ALERTS['LOGIN_FAIL']
 
     def __set_rules(self, login_url, register_url, logout_url, home_page):
         self.LOGIN_URL = login_url
@@ -116,3 +129,107 @@ class Auth(object):
 
     def __create_tables(self):
         self.db.create_all()
+
+    def __add_auth_depences(self):
+        auth.add_url_rule(rule=self.LOGIN_URL,
+                          methods=['GET'],
+                          view_func=self.__get_login_form())
+
+        auth.add_url_rule(rule=self.REGISTER_URL,
+                          methods=['GET'],
+                          view_func=self.__get_register_form())
+
+        auth.add_url_rule(rule='/auth/register',
+                          methods=['POST'],
+                          view_func=self.__get_register_controller())
+
+        auth.add_url_rule(rule="/auth/login",
+                          methods=['POST'],
+                          view_func=self.__get_login_controller())
+
+        auth.add_url_rule(rule=self.LOGOUT_URL,
+                          view_func=self.__get_logout_controller())
+
+    def __get_login_form(self):
+        def login_form():
+
+            if current_user.is_authenticated:
+                return redirect(self.HOME_PAGE)
+
+            return render_template('login.html',
+                                   title='Login',
+                                   reg=self.REGISTER_URL)
+
+        return login_form
+
+    def __get_register_form(self):
+        def register_form():
+
+            if current_user.is_authenticated:
+                return redirect(self.HOME_PAGE)
+            return render_template('register.html',
+                                   title='Register',
+                                   log=self.LOGIN_URL)
+
+        return register_form
+
+    def __get_login_controller(self):
+        def login():
+            username, password = request.form['username'], request.form[
+                'password']
+
+            if current_user.is_authenticated:
+                return redirect(self.HOME_PAGE)
+
+            user = self.User.query.filter_by(username=username).first()
+
+            if user and self.bcrypt.check_password_hash(
+                    user.password_hash, password):
+                login_user(user)
+
+                return redirect(self.HOME_PAGE)
+            else:
+                flash(self.LOGIN_FAIL, 'danger')
+                return redirect(self.LOGIN_URL)
+
+        return login
+
+    def __get_register_controller(self):
+        def register():
+            email, username, password = request.form['email'], request.form[
+                'username'], request.form['password']
+
+            if current_user.is_authenticated:
+                return redirect(self.HOME_PAGE)
+
+            elif self.User.query.filter_by(email=email).first():
+                flash(self.EMAIL_ALERT, 'danger')
+                return redirect(self.REGISTER_URL)
+
+            elif self.User.query.filter_by(username=username).first():
+                flash(self.USERNAME_ALERT, 'danger')
+                return redirect(self.REGISTER_URL)
+
+            elif len(password) < 8:
+                flash(self.PASSWORD_LENGTH, 'warning')
+                return redirect(self.REGISTER_URL)
+
+            else:
+                hashed_password = self.bcrypt.generate_password_hash(
+                    password).decode('utf-8')
+                user = self.User(email=email,
+                                 username=username,
+                                 password_hash=hashed_password)
+
+                user.insert()
+                flash(self.REGISTER_SUCCESS, 'success')
+                return redirect(self.LOGIN_URL)
+
+        return register
+
+    def __get_logout_controller(self):
+        def logout():
+            logout_user()
+            return redirect(self.HOME_PAGE)
+
+        return logout
