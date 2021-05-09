@@ -11,6 +11,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 from flask_authlib.utils import get_alerts
 from flask_authlib.auth.models import get_models
+from flask_authlib.exceptions import ConfigError
+from flask_authlib.utils import load_template_config
 
 from flask_bcrypt import Bcrypt
 
@@ -42,16 +44,20 @@ class Auth(object):
     """
 
     def __init__(self,
-                 app: Flask,
-                 db=None,
-                 home_page='/',
-                 login_url='/login',
-                 register_url='/register',
-                 logout_url='/logout') -> None:
+                 app: Flask = None,
+                 db: SQLAlchemy = None,
+                 home_page: str = '/',
+                 login_url: str = '/login',
+                 register_url: str = '/register',
+                 logout_url: str = '/logout',
+                 template_config: dict = None
+                 )->None:
         # Setting app and db
         self.app = app
         self.db = db
-
+        # Set template config
+        self.template_config = template_config
+        self.__set_template_config(config=self.template_config)
         # Settings url rules
         self.__set_rules(login_url, register_url, logout_url, home_page)
         self.__setup()
@@ -62,6 +68,8 @@ class Auth(object):
         auth = Auth(app, db)
         auth.init()
         """
+        if self.app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///:memory:':
+           raise ConfigError('PLEASE SET DATABASE URI !!!')
         try:
             # Setting Application secret key
             self.__add_secret_key()
@@ -172,6 +180,7 @@ class Auth(object):
 
             return render_template('login.html',
                                    title='Login',
+                                   cfg=self.template_config,
                                    reg=self.REGISTER_URL)
 
         return login_form
@@ -183,6 +192,7 @@ class Auth(object):
                 return redirect(self.HOME_PAGE)
             return render_template('register.html',
                                    title='Register',
+                                   cfg=self.template_config,
                                    log=self.LOGIN_URL)
 
         return register_form
