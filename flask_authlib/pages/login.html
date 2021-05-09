@@ -13,17 +13,17 @@
           margin-right: auto;
           text-align: left;
         ">
-        <h2 class="text-center mb-2">Login</h2>
+        <h2 class="text-center mb-2">{{ cfg['LOGIN_PAGE_TITLE'] }}</h2>
         <div class="mb-3">
-          <label for="username_field" class="form-label">Username</label>
+          <label for="username_field" class="form-label">{{ cfg['LOGIN_LABEL_USERNAME'] }}</label>
           <input name="username" type="text" class="form-control" id="username_field" required />
         </div>
         <div class="mb-3">
-          <label for="password_field" class="form-label">Password</label>
+          <label for="password_field" class="form-label">{{ cfg['LOGIN_LABEL_PASSWORD'] }}</label>
           <input name="password" type="password" class="form-control" id="password_field" required />
         </div>
         <div class="d-grid gap-2 mb-2">
-          <button class="btn btn-success" type="submit">Login</button>
+          <button class="btn {{ cfg['LOGIN_BTN'] }}" type="submit">{{ cfg['LOGIN_BTN_TEXT'] }}</button>
         </div>
         <p class="text-muted text-center">
           Or <a style="text-decoration: none" href="{{ reg }}">Register</a>

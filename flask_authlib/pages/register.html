@@ -13,24 +13,24 @@
           margin-right: auto;
           text-align: left;
         ">
-        <h2 class="text-center mb-2">Register</h2>
+        <h2 class="text-center mb-2">{{ cfg['REGISTER_PAGE_TITLE'] }}</h2>
         <div class="mb-3">
-          <label for="email_field" class="form-label">Email address</label>
+          <label for="email_field" class="form-label">{{ cfg['REGISTER_LABEL_EMAIL'] }}</label>
           <input type="email" class="form-control" id="email_field" aria-describedby="emailHelp" name="email" />
         </div>
         <div class="mb-3">
-          <label for="username_field" class="form-label">Username</label>
+          <label for="username_field" class="form-label">{{ cfg['REGISTER_LABEL_USERNAME'] }}</label>
           <input min="3" type="text" class="form-control" id="username_field" name="username" required />
         </div>
         <div class="mb-3">
-          <label for="password_field" class="form-label">Password</label>
+          <label for="password_field" class="form-label">{{ cfg['REGISTER_LABEL_PASSWORD'] }}</label>
           <input min="7" max="64" type="password" class="form-control" id="password_field" name="password" required />
           <span id="error_msg" class="text-danger mt-2" style="padding: 5px">
           </span>
         </div>
         <div class="d-grid gap-2 mb-2">
-          <button class="btn btn-warning" type="submit" id="form_btn">
-            Register
+          <button class="btn {{ cfg['REGISTER_BTN'] }}" type="submit" id="form_btn">
+            {{ cfg['REGISTER_BTN_TEXT'] }}
           </button>
         </div>
         <p class="text-muted text-center">
