@@ -93,6 +93,20 @@ class Auth(object):
         def load_user(user_id):
             return self.User.query.get(user_id)
 
+    def __set_template_config(self, config: dict = None) -> None:
+        default_config = load_template_config()
+        cfg = {}
+
+        if config is None:
+            self.template_config = default_config
+        else:
+            for i in default_config.keys():
+                if i in config:
+                    cfg[i] = config[i]
+                else:
+                    cfg[i] = default_config[i]
+            self.template_config = cfg
+
     def __get(self):
         bcrypt = Bcrypt(self.app)
         login_manager = LoginManager(self.app)
