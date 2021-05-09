@@ -12,3 +12,25 @@ def get_alerts() -> dict:
     }
 
     return messages
+
+
+def load_template_config() -> dict:
+    """
+    Function for returning template config (login form ...)
+    config = load_template_config()
+    p.s Based on bootstrap classes
+    """
+    config = {
+        "LOGIN_BTN": 'btn btn-success',
+        "REGISTER_BTN": 'btn btn-warning',
+        'LOGIN_BTN_TEXT': 'Login',
+        'REGISTER_BTN_TEXT': 'Register',
+        "LOGIN_PAGE_TITLE": 'Login',
+        "REGISTER_PAGE_TITLE": 'Register',
+        'LOGIN_LABEL_USERNAME': 'Username',
+        'LOGIN_LABEL_PASSWORD': 'Password',
+        'REGISTER_LABEL_USERNAME': 'Username',
+        'REGISTER_LABEL_PASSWORD': 'Password',
+        'REGISTER_LABEL_EMAIL': 'Email address'
+    }
+    return config
