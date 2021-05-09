@@ -21,8 +21,8 @@ def load_template_config() -> dict:
     p.s Based on bootstrap classes
     """
     config = {
-        "LOGIN_BTN": 'btn btn-success',
-        "REGISTER_BTN": 'btn btn-warning',
+        "LOGIN_BTN": 'btn-success',
+        "REGISTER_BTN": 'btn-warning',
         'LOGIN_BTN_TEXT': 'Login',
         'REGISTER_BTN_TEXT': 'Register',
         "LOGIN_PAGE_TITLE": 'Login',
