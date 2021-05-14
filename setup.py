@@ -3,12 +3,10 @@ import pathlib
 from setuptools import setup
 from setuptools import find_packages
 
-from flask_authlib import *
-
-
-BASE_PATH = pathlib.Path(__file__).parent
-
-README = (BASE_PATH / "README.md").read_text()
+from flask_authlib import (
+    __author__, __author_email__, __copyright__, __copyright__,
+    __description__, __license__, __title__, __url__, __version__
+)
 
 
 setup(
@@ -18,8 +16,6 @@ setup(
     author=__author__,
     author_email=__author_email__,
     url=__url__,
-    long_description=README,
-    long_description_content_type="text/markdown",
     description=__description__,
     platforms='any',
     packages=find_packages(),
