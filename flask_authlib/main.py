@@ -1,4 +1,6 @@
+from os import path
 from os import urandom
+from os import mkdir
 
 from flask import Flask
 from flask import flash
@@ -9,11 +11,6 @@ from flask import render_template
 
 from flask_sqlalchemy import SQLAlchemy
 
-from flask_authlib.utils import get_alerts
-from flask_authlib.auth.models import get_models
-from flask_authlib.exceptions import ConfigError
-from flask_authlib.utils import load_template_config
-
 from flask_bcrypt import Bcrypt
 
 from flask_login import login_user
@@ -21,13 +18,15 @@ from flask_login import logout_user
 from flask_login import current_user
 from flask_login import LoginManager
 
-
-auth = Blueprint('auth', __name__, template_folder='pages')
+from .utils import get_alerts
+from .models import get_models
+from .exceptions import ConfigError
+from .utils import load_template_config
+from .templates import _layout, _login, _register
 
 
 class Auth(object):
     """
-
     Auth
     `app` - Your Flask Application
     `db` - your db -> (SQLAlchemy) default is None
@@ -40,7 +39,6 @@ class Auth(object):
     app = Flask(__name__)
     db = SQLAlchemy(app)
     auth = Auth(app=app, db=db)
-
     """
 
     def __init__(self,
@@ -51,10 +49,12 @@ class Auth(object):
                  register_url: str = '/register',
                  logout_url: str = '/logout',
                  template_config: dict = None
-                 )->None:
+                 ) -> None:
         # Setting app and db
         self.app = app
         self.db = db
+        # Set Blueprint
+        self.blueprint = self.__create_blueprint()
         # Set template config
         self.template_config = template_config
         self.__set_template_config(config=self.template_config)
@@ -62,25 +62,55 @@ class Auth(object):
         self.__set_rules(login_url, register_url, logout_url, home_page)
         self.__setup()
 
-    def init(self):
+    def init(self) -> None:
         """
         Method for initalization.
         auth = Auth(app, db)
         auth.init()
         """
+        if self.app is None:
+            raise ConfigError('PLEASE SET YOUR APPLICATION !!!')
         if self.app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///:memory:':
-           raise ConfigError('PLEASE SET DATABASE URI !!!')
+            raise ConfigError('PLEASE SET DATABASE URI !!!')
+
+        self.blueprint.template_folder = path.join('templates')
+        self.path: str = self.app.instance_path.replace("instance", "")
+        self.parent_dir: str = path.join(
+            self.path, self.blueprint.template_folder)
+        try:
+            mkdir(self.parent_dir)
+        except FileExistsError:
+            pass
         try:
             # Setting Application secret key
             self.__add_secret_key()
             # Adding all auth depences
             self.__add_auth_depences()
-            self.app.register_blueprint(auth)
-
+            self.app.register_blueprint(self.blueprint)
+            self.app.template_folder = self.blueprint.template_folder
+            self.__create_forms()
         except AssertionError:
             pass
 
-    def __setup(self):
+    def __create_forms(self) -> None:
+        count: int = 0
+        # Define form names
+        forms = ['layout.html', 'login.html', 'register.html']
+        # Define form codes
+        html = [_layout, _login, _register]
+        for i in forms:
+            with open(f'{self.app.template_folder}/{i}', 'w') as f:
+                # Write into file
+                f.write(html[count])
+                f.close()
+                count += 1
+
+    def __create_blueprint(self):
+        # Create bluprint named auth
+        auth = Blueprint('auth', __name__)
+        return auth
+
+    def __setup(self) -> None:
         # Check db if exist ...
         self.db = self.__check_db()
         # Get User Database Model
@@ -92,7 +122,7 @@ class Auth(object):
         # Setting Auth Alert Messages
         self.__set_alerts()
         # Login view: auth -> login_form
-        self.login_manager.login_view = 'auth.login_form'
+        self.login_manager.login_view = 'self.blueprint.login_form'
         # Alert message category
         self.login_manager.login_message_category = "info"
         # Defalt user loader
@@ -121,7 +151,7 @@ class Auth(object):
 
         return bcrypt, login_manager
 
-    def __set_alerts(self):
+    def __set_alerts(self) -> None:
         # Alert messages
         self.ALERTS = get_alerts()
 
@@ -132,7 +162,8 @@ class Auth(object):
 
         self.LOGIN_FAIL = self.ALERTS['LOGIN_FAIL']
 
-    def __set_rules(self, login_url, register_url, logout_url, home_page):
+    def __set_rules(self, login_url, register_url,
+                    logout_url, home_page) -> None:
         self.LOGIN_URL = login_url
         self.REGISTER_URL = register_url
         self.LOGOUT_URL = logout_url
@@ -145,32 +176,32 @@ class Auth(object):
         else:
             return self.db
 
-    def __add_secret_key(self):
+    def __add_secret_key(self) -> None:
         if self.app.secret_key is None:
             self.app.secret_key = urandom(32)
 
-    def __create_tables(self):
+    def __create_tables(self) -> None:
         self.db.create_all()
 
-    def __add_auth_depences(self):
-        auth.add_url_rule(rule=self.LOGIN_URL,
-                          methods=['GET'],
-                          view_func=self.__get_login_form())
+    def __add_auth_depences(self) -> None:
+        self.blueprint.add_url_rule(rule=self.LOGIN_URL,
+                                    methods=['GET'],
+                                    view_func=self.__get_login_form())
 
-        auth.add_url_rule(rule=self.REGISTER_URL,
-                          methods=['GET'],
-                          view_func=self.__get_register_form())
+        self.blueprint.add_url_rule(rule=self.REGISTER_URL,
+                                    methods=['GET'],
+                                    view_func=self.__get_register_form())
 
-        auth.add_url_rule(rule='/auth/register',
-                          methods=['POST'],
-                          view_func=self.__get_register_controller())
+        self.blueprint.add_url_rule(rule='/auth/register',
+                                    methods=['POST'],
+                                    view_func=self.__get_register_controller())
 
-        auth.add_url_rule(rule="/auth/login",
-                          methods=['POST'],
-                          view_func=self.__get_login_controller())
+        self.blueprint.add_url_rule(rule="/auth/login",
+                                    methods=['POST'],
+                                    view_func=self.__get_login_controller())
 
-        auth.add_url_rule(rule=self.LOGOUT_URL,
-                          view_func=self.__get_logout_controller())
+        self.blueprint.add_url_rule(rule=self.LOGOUT_URL,
+                                    view_func=self.__get_logout_controller())
 
     def __get_login_form(self):
         def login_form():
