@@ -69,4 +69,28 @@ Screenshot:
 <small>Register page at /register</small>
 </p>
 
+# Advanced Usage
+
+>You can change urls
+
+**Defaults**
+
+- Login page - `/login`
+- Register page - `/register`
+- Logout url - `/logout`
+- Home page - `/`
+
+Write your urls before calling `init()` method at `Auth` class:
+
+```python
+...
+
+auth = Auth(app=app, db=db, login_url='/mylogin', 
+            register_url='/myreg', logout_url='/myexit',
+            home_page='/')
+auth.init()
+...
+
+```
+
 Abduaziz Ziyodov
