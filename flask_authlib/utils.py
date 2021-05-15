@@ -1,3 +1,6 @@
+from flask import Blueprint
+
+
 def get_alerts() -> dict:
     """
     Simple function for returnning messages dict.
@@ -36,7 +39,7 @@ def load_template_config() -> dict:
     return config
 
 
-def create_forms(path: str, forms: list, html:str) -> None:
+def create_forms(path: str, forms: list, html: str) -> None:
     # initial value of counter
     count: int = 0
     for form in forms:
@@ -45,3 +48,7 @@ def create_forms(path: str, forms: list, html:str) -> None:
             f.write(html[count])
             f.close()
             count += 1
+
+
+def create_blueprint():
+    return Blueprint('auth', __name__)
