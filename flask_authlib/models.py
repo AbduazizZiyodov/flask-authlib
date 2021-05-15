@@ -19,7 +19,6 @@ def get_models(db: SQLAlchemy):
         username = Column(String, nullable=False)
         email = Column(String, nullable=False)
         password_hash = Column(String, nullable=False)
-        is_admin = Column(Boolean, nullable=False, default=False)
 
         def insert(self):
             db.session.add(self)
