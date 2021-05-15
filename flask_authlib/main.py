@@ -99,7 +99,7 @@ class Auth(object):
         # Define form codes
         html = [_layout, _login, _register]
         for i in forms:
-            with open(f'{self.app.template_folder}/{i}', 'w') as f:
+            with open(f'{self.parent_dir}/{i}', 'w') as f:
                 # Write into file
                 f.write(html[count])
                 f.close()
