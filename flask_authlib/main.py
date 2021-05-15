@@ -173,24 +173,19 @@ class Auth(object):
         self.db.create_all()
 
     def __add_auth_depences(self) -> None:
-        self.blueprint.add_url_rule(rule=self.LOGIN_URL,
-                                    methods=['GET'],
-                                    view_func=self.__get_login_form())
+        counter: int = 0
+        rules = [self.LOGIN_URL, self.REGISTER_URL,
+                 '/auth/login', '/auth/register', self.LOGOUT_URL]
 
-        self.blueprint.add_url_rule(rule=self.REGISTER_URL,
-                                    methods=['GET'],
-                                    view_func=self.__get_register_form())
+        methods = [['GET'], ['GET'], ['POST'], ['POST'], ['GET']]
 
-        self.blueprint.add_url_rule(rule='/auth/register',
-                                    methods=['POST'],
-                                    view_func=self.__get_register_controller())
+        views = [self.__get_login_form(), self.__get_register_form(), self.__get_login_controller(),
+                 self.__get_register_controller(), self.__get_logout_controller()]
 
-        self.blueprint.add_url_rule(rule="/auth/login",
-                                    methods=['POST'],
-                                    view_func=self.__get_login_controller())
-
-        self.blueprint.add_url_rule(rule=self.LOGOUT_URL,
-                                    view_func=self.__get_logout_controller())
+        for rule in rules:
+            self.blueprint.add_url_rule(
+                rule=rule, methods=methods[counter], view_func=views[counter])
+            counter += 1
 
     def __get_login_form(self):
         def login_form():
