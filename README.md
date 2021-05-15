@@ -58,20 +58,15 @@ $ flask run --reload
 
 Screenshot:
 
-![alt text](screenshots/login.PNG "Title")
-
-<p style="text-align:center;">
+![LOGIN](screenshots/login.PNG)
 <small>Login page at /login</small>
-</p>
 
-![alt text](screenshots/register.PNG "Title")
-<p style="text-align:center;">
+![REGISTER](screenshots/register.PNG)
 <small>Register page at /register</small>
-</p>
 
 # Advanced Usage
 
->You can change urls
+> You can change urls
 
 **Defaults**
 
@@ -85,7 +80,7 @@ Write your urls before calling `init()` method at `Auth` class:
 ```python
 ...
 
-auth = Auth(app=app, db=db, login_url='/mylogin', 
+auth = Auth(app=app, db=db, login_url='/mylogin',
             register_url='/myreg', logout_url='/myexit',
             home_page='/')
 auth.init()
@@ -93,4 +88,63 @@ auth.init()
 
 ```
 
-Abduaziz Ziyodov
+> You can set your own template config!
+
+You can change:
+
+- Button colors at login and register page
+- Title at login and register page
+- All labels like Username.. email ...
+- Text in button.
+
+**Default template config**
+
+```json
+
+config = {
+        "LOGIN_BTN": "btn-success",
+        "REGISTER_BTN": "btn-warning",
+
+        "LOGIN_BTN_TEXT": "Login",
+        "REGISTER_BTN_TEXT": "Register",
+
+        "LOGIN_PAGE_TITLE": "Login",
+        "REGISTER_PAGE_TITLE": "Register",
+
+        "LOGIN_LABEL_USERNAME": "Username",
+        "LOGIN_LABEL_PASSWORD": "Password",
+        "REGISTER_LABEL_USERNAME": "Username",
+        "REGISTER_LABEL_PASSWORD": "Password",
+        "REGISTER_LABEL_EMAIL": "Email address"
+}
+```
+
+_p.s login-btn colors based on bootstrap classes_
+
+```python
+...
+my_config = {
+        "LOGIN_BTN": "btn-danger",
+        "REGISTER_BTN": "btn-primary",
+
+        "LOGIN_PAGE_TITLE": "Admin",
+        "REGISTER_PAGE_TITLE": "Admin"
+}
+auth = Auth(app=app, db=db, template_config=my_config)
+auth.init()
+...
+
+```
+
+p.s if the some settings are not entered, they will remain in their state.
+
+Screenshot:
+
+![LOGIN](screenshots/login_2.PNG)
+<small>Login page with own config</small>
+
+![REGISTER](screenshots/register_2.PNG)
+<small>Register page with own config</small>
+
+
+Author: Abduaziz Ziyodov
