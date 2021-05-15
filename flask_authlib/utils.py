@@ -1,4 +1,8 @@
 from flask import Blueprint
+from flask import request
+from flask import flash
+
+from werkzeug.exceptions import BadRequestKeyError
 
 
 def get_alerts() -> dict:
@@ -52,3 +56,14 @@ def create_forms(path: str, forms: list, html: str) -> None:
 
 def create_blueprint():
     return Blueprint('auth', __name__)
+
+
+def get_register_data():
+    try:
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+
+        return email, username, password
+    except BadRequestKeyError:
+        pass
