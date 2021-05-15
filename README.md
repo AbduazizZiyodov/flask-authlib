@@ -1,5 +1,7 @@
 # Flask-Authlib
 
+[![PyPI version](https://badge.fury.io/py/Flask-Authlib.svg)](https://badge.fury.io/py/Flask-Authlib)
+
 <hr>
 
 Flask-Authlib - authentication library for Flask Web Framework.
