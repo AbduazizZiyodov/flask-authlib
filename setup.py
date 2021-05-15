@@ -1,4 +1,4 @@
-import pathlib
+from os import path
 
 from setuptools import setup
 from setuptools import find_packages
@@ -8,6 +8,10 @@ from flask_authlib import (
     __description__, __license__, __title__, __url__, __version__
 )
 
+parent_dir = path.abspath(path.dirname(__file__))
+
+with open(path.join(parent_dir, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name=__title__,
@@ -20,6 +24,8 @@ setup(
     platforms='any',
     packages=find_packages(),
     copyright=__copyright__,
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     install_requires=["flask", "flask_login", "psycopg2-binary",
                       "sqlalchemy", "flask_sqlalchemy", "flask_bcrypt"],
     classifiers=[
