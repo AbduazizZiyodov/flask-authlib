@@ -21,6 +21,7 @@ from flask_login import LoginManager
 from .utils import get_alerts
 from .utils import create_forms
 from .utils import create_blueprint
+from .utils import get_login_data
 from .utils import get_register_data
 from .models import get_models
 from .exceptions import ConfigError
@@ -218,8 +219,10 @@ class Auth(object):
 
     def __get_login_controller(self):
         def login():
-            username, password = request.form['username'], request.form[
-                'password']
+            try:
+                username, password = get_login_data()
+            except TypeError:
+                return {'message': 'Please fill all required fields!'}
 
             if current_user.is_authenticated:
                 return redirect(self.HOME_PAGE)
