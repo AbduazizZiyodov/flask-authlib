@@ -20,6 +20,7 @@ from flask_login import LoginManager
 
 from .utils import get_alerts
 from .utils import create_forms
+from .utils import create_blueprint
 from .models import get_models
 from .exceptions import ConfigError
 from .utils import load_template_config
@@ -55,12 +56,13 @@ class Auth(object):
         self.app = app
         self.db = db
         # Set Blueprint
-        self.blueprint = self.__create_blueprint()
+        self.blueprint = create_blueprint()
         # Set template config
         self.template_config = template_config
         self.__set_template_config(config=self.template_config)
         # Settings url rules
         self.__set_rules(login_url, register_url, logout_url, home_page)
+        # Call setup method
         self.__setup()
 
     def init(self) -> None:
@@ -95,11 +97,6 @@ class Auth(object):
         except AssertionError:
             pass
 
-    def __create_blueprint(self):
-        # Create bluprint named auth
-        auth = Blueprint('auth', __name__)
-        return auth
-
     def __setup(self) -> None:
         # Check db if exist ...
         self.db = self.__check_db()
@@ -116,7 +113,6 @@ class Auth(object):
         # Alert message category
         self.login_manager.login_message_category = "info"
         # Defalt user loader
-
         @self.login_manager.user_loader
         def load_user(user_id):
             return self.User.query.get(user_id)
