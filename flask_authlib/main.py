@@ -21,6 +21,7 @@ from flask_login import LoginManager
 from .utils import get_alerts
 from .utils import create_forms
 from .utils import create_blueprint
+from .utils import get_register_data
 from .models import get_models
 from .exceptions import ConfigError
 from .utils import load_template_config
@@ -113,6 +114,7 @@ class Auth(object):
         # Alert message category
         self.login_manager.login_message_category = "info"
         # Defalt user loader
+
         @self.login_manager.user_loader
         def load_user(user_id):
             return self.User.query.get(user_id)
@@ -237,34 +239,14 @@ class Auth(object):
 
     def __get_register_controller(self):
         def register():
-            email, username, password = request.form['email'], request.form[
-                'username'], request.form['password']
-
+            try:
+                email, username, password = get_register_data()
+            except TypeError:
+                return {'message': 'Please fill all required fields!'}
             if current_user.is_authenticated:
                 return redirect(self.HOME_PAGE)
 
-            elif self.User.query.filter_by(email=email).first():
-                flash(self.EMAIL_ALERT, 'danger')
-                return redirect(self.REGISTER_URL)
-
-            elif self.User.query.filter_by(username=username).first():
-                flash(self.USERNAME_ALERT, 'danger')
-                return redirect(self.REGISTER_URL)
-
-            elif len(password) < 8:
-                flash(self.PASSWORD_LENGTH, 'warning')
-                return redirect(self.REGISTER_URL)
-
-            else:
-                hashed_password = self.bcrypt.generate_password_hash(
-                    password).decode('utf-8')
-                user = self.User(email=email,
-                                 username=username,
-                                 password_hash=hashed_password)
-
-                user.insert()
-                flash(self.REGISTER_SUCCESS, 'success')
-                return redirect(self.LOGIN_URL)
+            return self.__validate_registration(email, username, password)
 
         return register
 
@@ -274,3 +256,29 @@ class Auth(object):
             return redirect(self.HOME_PAGE)
 
         return logout
+
+    def __auth(self, email: str, username: str, password: str):
+        hashed_password = self.bcrypt.generate_password_hash(
+            password).decode('utf-8')
+        user = self.User(email=email,
+                         username=username,
+                         password_hash=hashed_password)
+
+        user.insert()
+        flash(self.REGISTER_SUCCESS, 'success')
+        return redirect(self.LOGIN_URL)
+
+    def __validate_registration(self, email: str, username: str, password: str) -> bool:
+        if self.User.query.filter_by(email=email).first():
+            flash(self.EMAIL_ALERT, 'danger')
+            return redirect(self.REGISTER_URL)
+
+        elif self.User.query.filter_by(username=username).first():
+            flash(self.USERNAME_ALERT, 'danger')
+            return redirect(self.REGISTER_URL)
+
+        elif len(password) < 8:
+            flash(self.PASSWORD_LENGTH, 'warning')
+            return redirect(self.REGISTER_URL)
+        else:
+            return self.__auth(email, username, password)
