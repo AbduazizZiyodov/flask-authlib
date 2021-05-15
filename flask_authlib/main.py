@@ -19,6 +19,7 @@ from flask_login import current_user
 from flask_login import LoginManager
 
 from .utils import get_alerts
+from .utils import create_forms
 from .models import get_models
 from .exceptions import ConfigError
 from .utils import load_template_config
@@ -86,24 +87,13 @@ class Auth(object):
             self.__add_secret_key()
             # Adding all auth depences
             self.__add_auth_depences()
-            self.app.register_blueprint(self.blueprint)
             self.app.template_folder = self.blueprint.template_folder
-            self.__create_forms()
+            self.app.register_blueprint(self.blueprint)
+            create_forms(self.parent_dir, forms=[
+                         'layout.html', 'login.html', 'register.html'],
+                         html=[_layout, _login, _register])
         except AssertionError:
             pass
-
-    def __create_forms(self) -> None:
-        count: int = 0
-        # Define form names
-        forms = ['layout.html', 'login.html', 'register.html']
-        # Define form codes
-        html = [_layout, _login, _register]
-        for i in forms:
-            with open(f'{self.parent_dir}/{i}', 'w') as f:
-                # Write into file
-                f.write(html[count])
-                f.close()
-                count += 1
 
     def __create_blueprint(self):
         # Create bluprint named auth
