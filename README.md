@@ -1,4 +1,4 @@
-# Flask-Authlib
+# **Flask-Authlib** 🔐
 
 [![PyPI version](https://badge.fury.io/py/Flask-Authlib.svg)](https://badge.fury.io/py/Flask-Authlib)
 
@@ -6,8 +6,9 @@
 
 Flask-Authlib - authentication library for Flask Web Framework.
 
+Advantages:
 - Templates: login , register
-- User Model
+- Default `user` Model
 - View Functions
 
 # Install
@@ -18,13 +19,13 @@ By using `pip`:
 $ pip install flask-authlib
 ```
 
-# Usage
+# Simple Usage
 
-- Firstly, import `Flask` from `flask`
-- Secondly, import `SQLAlchemy` from `flask_sqlalchemy`
-- Lastly, import `Auth` from `flask_authlib`
+- Import `Flask` from `flask`
+- Import `SQLAlchemy` from `flask_sqlalchemy`
+- Import `Auth` from `flask_authlib`
 
-Code:
+Code Sample:
 
 ```python
 from flask import Flask
@@ -58,26 +59,27 @@ $ export FLASK_APP=<app> && export FLASK_ENV=development
 $ flask run --reload
 ```
 
-Screenshot:
+**Screenshots:**
 
 ![LOGIN](screenshots/login.PNG)
-<small>Login page at /login</small>
+Login page at `/login`
 
 ![REGISTER](screenshots/register.PNG)
-<small>Register page at /register</small>
+Register page at `/register`
 
-# Advanced Usage
+# **Advanced Usage**
 
 > You can change urls
 
 **Defaults**
 
+- Home page - `/`
 - Login page - `/login`
 - Register page - `/register`
 - Logout url - `/logout`
-- Home page - `/`
 
-Write your urls before calling `init()` method at `Auth` class:
+
+Write your urls before calling `init()` method:
 
 ```python
 ...
@@ -87,15 +89,14 @@ auth = Auth(app=app, db=db, login_url='/mylogin',
             home_page='/')
 auth.init()
 ...
-
 ```
 
 > You can set your own template config!
 
 You can change:
 
-- Button colors at login and register page
-- Title at login and register page
+- Button color on forms
+- Form title at login and register page
 - All labels like Username.. email ...
 - Text in button.
 
@@ -121,7 +122,9 @@ config = {
 }
 ```
 
-_p.s login-btn colors based on bootstrap classes_
+_p.s btn colors based on bootstrap classes_
+
+Setting your config:
 
 ```python
 ...
@@ -135,18 +138,65 @@ my_config = {
 auth = Auth(app=app, db=db, template_config=my_config)
 auth.init()
 ...
-
 ```
 
-p.s if the some settings are not entered, they will remain in their state.
+>If some settings are not entered, they remain as default
+
+**Screenshots:**
+
+>![LOGIN](screenshots/login_2.PNG)
+>Login page
+
+<hr>
+
+>![REGISTER](screenshots/register_2.PNG)
+>Register page
+
+# **Running Example** 🚀
+
+### First way
+
+> Required  `docker` 
+
+Project directory have:
+- dockerfile
+- docker_compose.yml
+
+For running this you have to type this command:
+
+```bash
+$ docker-compose up
+```
 
 Screenshot:
 
-![LOGIN](screenshots/login_2.PNG)
-<small>Login page with own config</small>
+![DOCKER](screenshots/docker.PNG)
 
-![REGISTER](screenshots/register_2.PNG)
-<small>Register page with own config</small>
+## **Second way**
 
+Clone this repo:
 
-Author: Abduaziz Ziyodov
+```bash
+$ git clone https://github.com/AbduazizZiyodov/flask-authlib.git
+```
+
+Navigate to `/example`:
+
+```bash
+$ cd example/
+```
+
+Install all required packages:
+
+```bash
+$ pip install -r requirements.txt
+```
+
+Run development server:
+* `$ python app.py` or
+* `$ gunicorn app:app` or
+* `$ export FLASK_APP=app && flask run --reload`
+
+Enjoy 😅
+
+**Author: Abduaziz Ziyodov**
