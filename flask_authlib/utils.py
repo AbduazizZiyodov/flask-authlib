@@ -34,3 +34,14 @@ def load_template_config() -> dict:
         'REGISTER_LABEL_EMAIL': 'Email address'
     }
     return config
+
+
+def create_forms(path: str, forms: list, html:str) -> None:
+    # initial value of counter
+    count: int = 0
+    for form in forms:
+        with open(f'{path}/{form}', 'w') as f:
+            # Write into file
+            f.write(html[count])
+            f.close()
+            count += 1
