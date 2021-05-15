@@ -67,3 +67,13 @@ def get_register_data():
         return email, username, password
     except BadRequestKeyError:
         pass
+
+
+def get_login_data():
+    try:
+        username = request.form['username']
+        password = request.form['password']
+
+        return username, password
+    except BadRequestKeyError:
+        pass
