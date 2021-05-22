@@ -27,7 +27,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     install_requires=["flask", "flask_login", "psycopg2-binary",
-                      "sqlalchemy", "flask_sqlalchemy", "flask_bcrypt"],
+                      "sqlalchemy", "flask_sqlalchemy", "flask_bcrypt", "cryptography==3.3.2", "python-jose", 'jwt'],
     classifiers=[
         "License :: OSI Approved :: MIT License",
         'Operating System :: OS Independent',
