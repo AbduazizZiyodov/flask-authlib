@@ -7,6 +7,7 @@
 Flask-Authlib - authentication library for Flask Web Framework.
 
 Advantages:
+
 - Templates: login , register
 - Default `user` Model
 - View Functions
@@ -78,7 +79,6 @@ Register page at `/register`
 - Register page - `/register`
 - Logout url - `/logout`
 
-
 Write your urls before calling `init()` method:
 
 ```python
@@ -140,25 +140,26 @@ auth.init()
 ...
 ```
 
->If some settings are not entered, they remain as default
+> If some settings are not entered, they remain as default
 
 **Screenshots:**
 
->![LOGIN](screenshots/login_2.PNG)
->Login page
+> ![LOGIN](screenshots/login_2.PNG)
+> Login page
 
 <hr>
 
->![REGISTER](screenshots/register_2.PNG)
->Register page
+> ![REGISTER](screenshots/register_2.PNG)
+> Register page
 
 # **Running Example** 🚀
 
 ### First way
 
-> Required  `docker` 
+> Required `docker`
 
 Project directory have:
+
 - dockerfile
 - docker_compose.yml
 
@@ -193,10 +194,96 @@ $ pip install -r requirements.txt
 ```
 
 Run development server:
-* `$ python app.py` or
-* `$ gunicorn app:app` or
-* `$ export FLASK_APP=app && flask run --reload`
+
+- `$ python app.py` or
+- `$ gunicorn app:app` or
+- `$ export FLASK_APP=app && flask run --reload`
 
 Enjoy 😅
+
+# **JWT**
+
+> v1.3.1
+
+Setup JWT authentication for your API with auth0!
+
+Example:
+
+```python
+from flask import Flask
+from flask_authlib import JWT
+
+app = Flask(__name__)
+jwt = JWT(app=app, AUTH0_DOMAIN='',API_AUDIENCE='')
+
+required = jwt.get_requires_auth_decorator()
+
+@app.route('/', methods=['GET'])
+@required('read:data')
+def home(token):
+    return {"data": "secret"}
+
+```
+
+- Import `JWT` from this library
+- Define your app
+- Create jwt var from JWT class and set some vars.
+  > Params:
+  > **AUTH0_DOMAIN**: your domain for auth0:
+  > ![DOMAIN](screenshots/auth0_domain.PNG)
+  > "abduaziz.us.auth0.com"
+  > **API_AUDINCE**: your api idenf. for auth0:
+  > ![AUDINCE](screenshots/audince.PNG)
+  > "test_api"
+  > create example of decorator by calling `get_requires_auth_decorator()` method
+
+```python
+@requires(permission:str)
+```
+
+> If permission in auth token , this view will be send success response , else 401😅
+
+Before doing these , you have to create user permissions from your **API**:
+
+![AUDINCE](screenshots/audince.PNG)
+
+> `read:data` permission
+
+For testing ,you should register new user and get token from response:
+
+![LOGIN_URI](screenshots/login_uri.PNG)
+
+> LOGIN_URI:
+
+```
+https://{{AUTH0_DOMAIN}}/authorize?
+audience={{API_AUDINCE}}&response_type=token&
+client_id={{CLIENT_ID}}&redirect_uri={{REDIRECT_URI}}
+```
+
+* `CLIENT_ID` - you can get it from your page of API.
+* `REDIRECT_URI` - you can set it from API settings
+
+After adding new user , navigate user management page and assign permissions to your user:
+
+![PERM](screenshots/user_perm.PNG)
+
+> logout_uri: `{AUTH0_DOMAIN}/logout`
+
+Next , login again and you will get permission based jwt token:
+
+![TOKEN](screenshots/jwt.PNG)
+🎉
+
+## **Test it !**
+
+Send request without auth token:
+
+![401](screenshots/401.PNG)
+
+Send request with auth token:
+
+![OK](screenshots/jwt_success.PNG)
+✅ Success!
 
 **Author: Abduaziz Ziyodov**
