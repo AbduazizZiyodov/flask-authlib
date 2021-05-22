@@ -1,6 +1,6 @@
 # **Flask-Authlib** 🔐
 
-[![PyPI version](https://badge.fury.io/py/Flask-Authlib.svg)](https://badge.fury.io/py/Flask-Authlib)
+<img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=py&type=6&v=1.3.1&x2=0" alt="PyPI version" height="18">
 
 <hr>
 
