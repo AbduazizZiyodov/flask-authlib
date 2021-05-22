@@ -7,7 +7,7 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
-from ..exceptions import AuthError
+from .exceptions import AuthError
 
 
 class JWT(object):
