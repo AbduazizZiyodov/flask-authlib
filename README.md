@@ -1,6 +1,6 @@
 # **Flask-Authlib** 🔐
 
-<img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=py&type=6&v=1.3.1&x2=0" alt="PyPI version" height="18">
+[![PyPI version](https://badge.fury.io/py/Flask-Authlib.svg)](https://badge.fury.io/py/Flask-Authlib)
 
 <hr>
 
@@ -20,7 +20,9 @@ By using `pip`:
 $ pip install flask-authlib
 ```
 
-# Simple Usage
+# **Simple Usage**
+
+> Username & Password based authentication 🔑
 
 - Import `Flask` from `flask`
 - Import `SQLAlchemy` from `flask_sqlalchemy`
@@ -47,7 +49,6 @@ db = SQLAlchemy(app)
 auth = Auth(app=app, db=db)
 auth.init()
 
-# simple route
 @app.route('/')
 def home_page():
     return {'message': 'Hi, bro 😁'}
@@ -152,16 +153,137 @@ auth.init()
 > ![REGISTER](screenshots/register_2.PNG)
 > Register page
 
-# **Running Example** 🚀
+# **JWT Usage**
 
-### First way
+> v1.3.1 - jwt token based authentication 🔑
 
-> Required `docker`
+*Setup JWT authentication for your API with auth0!*
+
+Example of code:
+
+```python
+from flask import Flask
+from flask_authlib import JWT
+
+app = Flask(__name__)
+jwt = JWT(app=app, AUTH0_DOMAIN='*',API_AUDIENCE='*')
+
+
+@app.route('/', methods=['GET'])
+@jwt.required('read:data')
+def home(token):
+    return {"data": ['abduaziz', 'backend', 'programmer']}
+
+```
+
+- Import `JWT` from this library
+- Define your app
+- Create jwt var from JWT class and set some vars.
+- **Params:**
+- `AUTH0_DOMAIN`: your domain for auth0:
+  > ![DOMAIN](screenshots/auth0_domain.PNG)
+  > abduaziz.us.auth0.com
+- `API_AUDINCE`: this is your API idenfication for auth0:
+  > ![AUDINCE](screenshots/audince.PNG)
+  > test_api
+
+You have to create user permissions from your **API**:
+
+![AUDINCE](screenshots/permission.PNG)
+
+> `read:data` ~> permission
+
+For testing ,you should add new user. Then, get jwt token from response:
+
+![LOGIN_URI](screenshots/login_uri.PNG)
+
+> **LOGIN_URI**:
+>```
+>https://{{AUTH0_DOMAIN}}/authorize?
+>audience={{API_AUDINCE}}&>response_type=token&
+>client_id={{CLIENT_ID}}&redirect_uri={>{REDIRECT_URI}}
+>```
+
+
+* `CLIENT_ID` - you can get it from your page of API.
+* `REDIRECT_URI` - you can set it from API settings
+
+After adding new user , navigate user management page and assign permissions to your user:
+
+![PERM](screenshots/user_perm.PNG)
+
+> **LOGOUT_URI**: `{AUTH0_DOMAIN}/logout`
+
+Next , login again and you will get permission based jwt token from http response:
+
+![TOKEN](screenshots/jwt.PNG)
+😁🎉
+
+> p.s Check this jwt token from jwt.io
+
+## **Test it !**
+
+Application code:
+
+```python
+@app.route('/', methods=['GET'])
+@jwt.required('read:data')
+def home(token):
+    return {"data": ['abduaziz', 'backend', 'programmer']}
+```
+
+> `@app.route(url_rule:str, methods:list)` - we should sent GET request to `/`
+
+> `@jwt.required(permission:str)` - this is protection of this API view. User have to send request with jwt token based on required permission. For this view , required `read:data` permission.
+
+If the above requirements are met , user will definitely get the necessary information 😃
+
+
+**Send request without jwt token🧐:**
+
+![401](screenshots/401.PNG)
+ok 🙂
+
+**Send request with jwt token😎:**
+
+![OK](screenshots/jwt_success.PNG)
+✅ Success, it works 🥳
+
+Example of code for sending request:
+
+```python
+import requests
+
+def send(url:str, token:str)->str:
+    headers = {
+      'Authorization': f'Bearer {token}'
+    }
+    response = requests.request("GET", url, headers=headers)
+
+    return response.text
+
+def main():
+  url = input('url>')
+  token = input('jwt>')
+  print(send(url, token))
+
+if __name__ == "__main__":
+    main()
+```
+
+![REQUESTS](screenshots/requests.PNG)
+
+
+# **Running of Example** 🚀
+
+## **First way**
+
+> Required `docker`🐳
 
 Project directory have:
 
-- dockerfile
-- docker_compose.yml
+- `Dockerfile`
+- `docker-compose.yml`
 
 For running this you have to type this command:
 
@@ -201,89 +323,5 @@ Run development server:
 
 Enjoy 😅
 
-# **JWT**
-
-> v1.3.1
-
-Setup JWT authentication for your API with auth0!
-
-Example:
-
-```python
-from flask import Flask
-from flask_authlib import JWT
-
-app = Flask(__name__)
-jwt = JWT(app=app, AUTH0_DOMAIN='',API_AUDIENCE='')
-
-required = jwt.get_requires_auth_decorator()
-
-@app.route('/', methods=['GET'])
-@required('read:data')
-def home(token):
-    return {"data": "secret"}
-
-```
-
-- Import `JWT` from this library
-- Define your app
-- Create jwt var from JWT class and set some vars.
-  > Params:
-  > **AUTH0_DOMAIN**: your domain for auth0:
-  > ![DOMAIN](screenshots/auth0_domain.PNG)
-  > "abduaziz.us.auth0.com"
-  > **API_AUDINCE**: your api idenf. for auth0:
-  > ![AUDINCE](screenshots/audince.PNG)
-  > "test_api"
-  > create example of decorator by calling `get_requires_auth_decorator()` method
-
-```python
-@requires(permission:str)
-```
-
-> If permission in auth token , this view will be send success response , else 401😅
-
-Before doing these , you have to create user permissions from your **API**:
-
-![AUDINCE](screenshots/audince.PNG)
-
-> `read:data` permission
-
-For testing ,you should register new user and get token from response:
-
-![LOGIN_URI](screenshots/login_uri.PNG)
-
-> LOGIN_URI:
-
-```
-https://{{AUTH0_DOMAIN}}/authorize?
-audience={{API_AUDINCE}}&response_type=token&
-client_id={{CLIENT_ID}}&redirect_uri={{REDIRECT_URI}}
-```
-
-* `CLIENT_ID` - you can get it from your page of API.
-* `REDIRECT_URI` - you can set it from API settings
-
-After adding new user , navigate user management page and assign permissions to your user:
-
-![PERM](screenshots/user_perm.PNG)
-
-> logout_uri: `{AUTH0_DOMAIN}/logout`
-
-Next , login again and you will get permission based jwt token:
-
-![TOKEN](screenshots/jwt.PNG)
-🎉
-
-## **Test it !**
-
-Send request without auth token:
-
-![401](screenshots/401.PNG)
-
-Send request with auth token:
-
-![OK](screenshots/jwt_success.PNG)
-✅ Success!
 
 **Author: Abduaziz Ziyodov**
