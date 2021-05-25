@@ -23,6 +23,7 @@ class JWT(object):
         self.ALGORITHMS = ALGORITHMS
         self.JSON_URL = f'https://{self.AUTH0_DOMAIN}/.well-known/jwks.json'
         self.setup()
+        self.required = self.get_requires_auth_decorator()
     def setup(self):
         @self.app.errorhandler(AuthError)
         def auth_error_handler(AuthError):
