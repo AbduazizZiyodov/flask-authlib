@@ -8,7 +8,7 @@ Flask-Authlib - authentication library for Flask Web Framework.
 
 Advantages:
 
-- Templates: login , register
+- Templates: login, register
 - Default `user` Model
 - View Functions
 
@@ -22,7 +22,7 @@ $ pip install flask-authlib
 
 # **Simple Usage**
 
-> Username & Password based authentication 🔑
+> Username & Password-based authentication 🔑
 
 - Import `Flask` from `flask`
 - Import `SQLAlchemy` from `flask_sqlalchemy`
@@ -71,7 +71,7 @@ Register page at `/register`
 
 # **Advanced Usage**
 
-> You can change urls
+> You can change URLs
 
 **Defaults**
 
@@ -80,7 +80,7 @@ Register page at `/register`
 - Register page - `/register`
 - Logout url - `/logout`
 
-Write your urls before calling `init()` method:
+Write your URLs before calling the `init()` method:
 
 ```python
 ...
@@ -92,11 +92,11 @@ auth.init()
 ...
 ```
 
-> You can set your own template config!
+> You can set your template config!
 
 You can change:
 
-- Button color on forms
+- Button colour on forms
 - Form title at login and register page
 - All labels like Username.. email ...
 - Text in button.
@@ -123,7 +123,7 @@ config = {
 }
 ```
 
-_p.s btn colors based on bootstrap classes_
+_p.s button colours based on bootstrap classes_
 
 Setting your config:
 
@@ -155,7 +155,7 @@ auth.init()
 
 # **JWT Usage**
 
-> v1.3.1 - jwt token based authentication 🔑
+> v1.3.1 - jwt token-based authentication 🔑
 
 *Setup JWT authentication for your API with auth0!*
 
@@ -193,7 +193,7 @@ You have to create user permissions from your **API**:
 
 > `read:data` ~> permission
 
-For testing ,you should add new user. Then, get jwt token from response:
+For testing, you should add a new user. Then, get the jwt token from the response:
 
 ![LOGIN_URI](screenshots/login_uri.PNG)
 
@@ -208,13 +208,13 @@ For testing ,you should add new user. Then, get jwt token from response:
 * `CLIENT_ID` - you can get it from your page of API.
 * `REDIRECT_URI` - you can set it from API settings
 
-After adding new user , navigate user management page and assign permissions to your user:
+After adding a new user, navigate the user management page and assign permissions to your user:
 
 ![PERM](screenshots/user_perm.PNG)
 
 > **LOGOUT_URI**: `{AUTH0_DOMAIN}/logout`
 
-Next , login again and you will get permission based jwt token from http response:
+Next, log in again and you will get a permission-based jwt token from HTTP response:
 
 ![TOKEN](screenshots/jwt.PNG)
 😁🎉
@@ -234,9 +234,9 @@ def home(token):
 
 > `@app.route(url_rule:str, methods:list)` - we should sent GET request to `/`
 
-> `@jwt.required(permission:str)` - this is protection of this API view. User have to send request with jwt token based on required permission. For this view , required `read:data` permission.
+> `@jwt.required(permission: str)` - this is the protection of this API view. The user has to send a request with jwt token based on required permission. For this view, required `read: data` permission.
 
-If the above requirements are met , user will definitely get the necessary information 😃
+If the above requirements are met, the user will get the necessary information 😃
 
 
 **Send request without jwt token🧐:**
@@ -244,7 +244,7 @@ If the above requirements are met , user will definitely get the necessary infor
 ![401](screenshots/401.PNG)
 ok 🙂
 
-**Send request with jwt token😎:**
+**Send a request with jwt token😎:**
 
 ![OK](screenshots/jwt_success.PNG)
 ✅ Success, it works 🥳
@@ -280,7 +280,7 @@ if __name__ == "__main__":
 
 > Required `docker`🐳
 
-Project directory have:
+The project directory has:
 
 - `Dockerfile`
 - `docker-compose.yml`
