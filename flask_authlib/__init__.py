@@ -1,14 +1,8 @@
-from .main import Auth
 from .jwt import JWT
+from .main import Auth
 
-__all__ = [Auth, JWT]
+from .settings import Alerts
+from .settings import BaseConfig
+from .settings import TemplateConfig
 
-__license__ = 'MIT'
-__title__ = 'Flask-Authlib'
-__author__ = 'Abduaziz Ziyodov'
-__version_info__ = ('1', '3', '2')
-__version__ = '.'.join(__version_info__)
-__author_email__ = 'abduaziz.ziyodov@mail.ru'
-__copyright__ = '(c) 2021 by Abduaziz Ziyodov'
-__url__ = 'https://github.com/AbduazizZiyodov/flask-authlib'
-__description__ = 'Authentication library for Flask Web Framework '
+__all__ = ["Auth", "JWT", "Alerts", "BaseConfig", "TemplateConfig"]
