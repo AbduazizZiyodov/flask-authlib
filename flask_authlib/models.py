@@ -1,24 +1,17 @@
-from sqlalchemy import Column
-from sqlalchemy import Integer
-from sqlalchemy import String
-from sqlalchemy import Boolean
-
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
-def get_models(db: SQLAlchemy):
+from flask_sqlalchemy import SQLAlchemy
+
+
+def get_user_model(db: SQLAlchemy, table_name:str):
     class User(db.Model, UserMixin):
-        __tablename__ = 'Users'
+        __tablename__ = table_name
+        __table_args__ = {'extend_existing': True}
 
-        def __init__(self, username, email, password_hash):
-            self.username = username
-            self.email = email
-            self.password_hash = password_hash
-
-        id = Column(Integer, primary_key=True)
-        username = Column(String, nullable=False)
-        email = Column(String, nullable=False)
-        password_hash = Column(String, nullable=False)
+        id = db.Column(db.Integer, primary_key=True)
+        username = db.Column(db.String, nullable=False)
+        email = db.Column(db.String, nullable=False)
+        password_hash = db.Column(db.String, nullable=False)
 
         def insert(self):
             db.session.add(self)
