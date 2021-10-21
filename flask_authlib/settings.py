@@ -25,6 +25,9 @@ class BaseConfig:
     MIN_PASSWORD_LENGTH = 8
     TABLENAME = "user"
 
+    USERNAME_UNIQUE = True
+    EMAIL_UNIQUE = True
+
 
 class Alerts:
     EMAIL_ALERT = "This email already taken!"

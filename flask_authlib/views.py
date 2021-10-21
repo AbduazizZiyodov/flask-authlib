@@ -77,7 +77,7 @@ class LoginView(BaseView):
             login_user(user)
 
             return redirect(self.HOME_URL)
-            
+
         flash(self.alerts.LOGIN_FAIL, "danger")
 
         return redirect(self.LOGIN_URL)
@@ -112,13 +112,15 @@ class RegisterView(BaseView):
         user_by_username = self.User.query.filter_by(
             username=kwargs["username"]).first()
 
-        if user_by_email is not None:
-            flash(self.alerts.EMAIL_ALERT, "danger")
-            return redirect(self.REGISTER_URL)
-
-        if user_by_username is not None:
-            flash(self.alerts.USERNAME_ALERT, "danger")
-            return redirect(self.REGISTER_URL)
+        if self.base_config.EMAIL_UNIQUE:
+            if user_by_email is not None:
+                flash(self.alerts.EMAIL_ALERT, "danger")
+                return redirect(self.REGISTER_URL)
+                
+        if self.base_config.USERNAME_UNIQUE:
+            if user_by_username is not None:
+                flash(self.alerts.USERNAME_ALERT, "danger")
+                return redirect(self.REGISTER_URL)
 
         if len(kwargs["password"]) < self.base_config.MIN_PASSWORD_LENGTH:
             flash(self.alerts.PASSWORD_LENGTH, "warning")
