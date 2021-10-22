@@ -68,7 +68,7 @@ Install this library by using `pip` command:
 $ pip install -U flask_authlib
 ```
 
-!!! info "Licence"
+!!! info "License"
     This project is licensed under the terms of the MIT license.
 
 ```
