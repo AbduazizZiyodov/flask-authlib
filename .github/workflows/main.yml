@@ -1,0 +1,48 @@
+name: Build & Deploy Docs
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.7"
+
+    - name: Install MkDocs
+      run: pip install -U mkdocs mkdocs-material
+        
+    - name: Build Docs
+      run: mkdocs build
+
+    - name: Upload production-ready build files
+      uses: actions/upload-artifact@v2
+      with:
+        name: docs-files
+        path: ./site
+  
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest    
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: docs-files
+        path: ./site
+
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
