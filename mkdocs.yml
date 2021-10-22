@@ -1,8 +1,10 @@
 site_name: Flask-Authlib
+site_url: http://abduazizziyodov.github.io/flask_authlib
 site_description: Flask-Authlib - Authentication Library For Flask Web Framework 🔥
+repo_name: flask-authlib
 repo_url: https://github.com/AbduazizZiyodov/flask-authlib
-repo_name: AbduazizZiyodov/flask-authlib
 edit_uri: ""
+
 theme:
   icon:
     logo: material/account-lock
