@@ -1,0 +1,65 @@
+site_name: Flask-Authlib
+site_description: Flask-Authlib - Authentication Library For Flask Web Framework 🔥
+repo_url: https://github.com/AbduazizZiyodov/flask-authlib
+repo_name: AbduazizZiyodov/flask-authlib
+edit_uri: ""
+theme:
+  icon:
+    logo: material/account-lock
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+  name: material
+  palette:
+    - scheme: default
+      primary: orange
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: slate
+      primary: orange
+      accent: orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  features:
+    - header.autohide
+    - navigation.sections
+    - navigation.expand
+    - content.tabs.link
+plugins:
+  - search:
+      lang: en
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/AbduazizZiyodov/flask-authlib
+      name: See this project on Github
+    - icon: fontawesome/brands/telegram-plane
+      link: https://t.me/AbduazizZiyodov
+      name: Author's Telegram Account
+copyright: Copyright &copy; 2021 Abduaziz Ziyodov
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+nav:
+  - index.md
+  - intro_to_flask.md
