@@ -1,59 +1,62 @@
 class BaseConfig:
-    HOME_URL = "/"
-    LOGIN_URL = "/login"
-    REGISTER_URL = "/register"
-    LOGOUT_URL = "/logout"
+    HOME_URL: str = "/"
+    LOGIN_URL: str = "/login"
+    REGISTER_URL: str = "/register"
+    LOGOUT_URL: str = "/logout"
 
-    logout = {
+    logout: dict = {
         "path": LOGOUT_URL,
         "name": "logout_view"
     }
-    login = {
+    login: dict = {
         "path": LOGIN_URL,
         "name": "login_view"
     }
-    register = {
+    register: dict = {
         "path": REGISTER_URL,
         "name": "register_view"
     }
 
     BLUEPRINT_NAME: str = "auth"
-    TEMPLATE_FOLDER_NAME: str = "templates"
+
+    TEMPLATES_FILE_NAME: str = "templates.zip"
+
+    TEMPLATES_FOLDER_NAME: str = "templates"
+    STATIC_FOLDER__NAME: str = "static"
 
     LOGIN_MESSAGE_CATEGORY = "info"
 
-    MIN_PASSWORD_LENGTH = 8
-    TABLENAME = "user"
+    TABLENAME: str = "user"
+    MIN_PASSWORD_LENGTH: int = 8
 
-    USERNAME_UNIQUE = True
-    EMAIL_UNIQUE = True
+    EMAIL_UNIQUE: bool = True
 
 
 class Alerts:
-    EMAIL_ALERT = "This email already taken!"
-    USERNAME_ALERT = "This username already taken!"
+    EMAIL_ALERT: str = "This email is already taken!"
+    USERNAME_ALERT: str = "This username is already taken!"
 
-    PASSWORD_LENGTH = "Password must be 8 characters long"
+    PASSWORD_LENGTH: str = "Password must be {length} characters long!"
 
-    REGISTER_SUCCESS = "Register was successfuly!"
+    REGISTER_SUCCESS: str = "Register was successfuly!"
 
-    LOGIN_FAIL = "Email or password incorrect!"
+    LOGIN_FAIL: str = "The username or password is incorrect!"
 
-    REGISTER_FAIL = "This email and username already taken!"
+    REGISTER_FAIL: str = "This email and username are already taken!"
 
-    BAD_REQUEST = "Bad request!"
-    REQUIRED_FIELD = "Please fill all required fields!"
+    BAD_REQUEST: str = "Bad request!"
+    REQUIRED_FIELD: str = "Please, fill in all required fields!"
 
 
 class TemplateConfig:
-    LOGIN_BTN = "btn-success"
-    REGISTER_BTN = "btn-warning"
-    LOGIN_BTN_TEXT = "Login"
-    REGISTER_BTN_TEXT = "Register"
-    LOGIN_PAGE_TITLE = "Login"
-    REGISTER_PAGE_TITLE = "Register"
-    LOGIN_LABEL_USERNAME = "Username"
-    LOGIN_LABEL_PASSWORD = "Password"
-    REGISTER_LABEL_USERNAME = "Username"
-    REGISTER_LABEL_PASSWORD = "Password"
-    REGISTER_LABEL_EMAIL = "Email address"
+    LOGIN_BTN: str = "btn-success"
+    REGISTER_BTN: str = "btn-warning"
+    LOGIN_BTN_TEXT: str = "Login"
+    REGISTER_BTN_TEXT: str = "Register"
+    LOGIN_PAGE_TITLE: str = "Login"
+    REGISTER_PAGE_TITLE: str = "Register"
+    LOGIN_LABEL_USERNAME: str = "Username"
+    LOGIN_LABEL_PASSWORD: str = "Password"
+    REGISTER_LABEL_USERNAME: str = "Username"
+    REGISTER_LABEL_PASSWORD: str = "Password"
+    REGISTER_LABEL_EMAIL: str = "Email address"

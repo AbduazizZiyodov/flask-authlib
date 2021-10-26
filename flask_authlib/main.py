@@ -1,12 +1,17 @@
+import secrets
+
 from os import path
-from os import urandom
+from shutil import rmtree
+
+from typing import List
+
+from zipfile import ZipFile
+from distutils.dir_util import copy_tree
 
 from flask import Flask
 from flask import Blueprint
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-
-from distutils.dir_util import copy_tree
 
 from .views import *
 from .models import get_user_model
@@ -37,8 +42,6 @@ class Auth(object):
         self.User = get_user_model(self.db, self.base_config.TABLENAME)
 
         self.blueprint_name = self.base_config.BLUEPRINT_NAME
-        self.template_folder = \
-            self.base_config.TEMPLATE_FOLDER_NAME
 
         self.blueprint = Blueprint(
             self.blueprint_name, __name__
@@ -47,11 +50,14 @@ class Auth(object):
         self.setup()
 
     def setup(self) -> None:
-        if self.app.secret_key is None:
-            self.app.secret_key = urandom(64)
-
         if not check_table_name(self.db, self.base_config.TABLENAME):
             self.db.create_all()
+
+        self.app.config.update(
+            TEMPLATES_AUTO_RELOAD=True,
+            STATIC_FOLDER=self.base_config.STATIC_FOLDER__NAME,
+            SECRET_KEY=secrets.token_hex()
+        )
 
         self.create_templates()
         self.setup_flask_login()
@@ -60,7 +66,8 @@ class Auth(object):
     def setup_flask_login(self) -> None:
         self.login_manager = LoginManager(self.app)
 
-        self.login_manager.login_view = self.blueprint_name + '.login_view'
+        self.login_manager.login_view = \
+            self.blueprint_name + "." + self.base_config.login["name"]
 
         self.login_manager.login_message_category =\
             self.base_config.LOGIN_MESSAGE_CATEGORY
@@ -68,21 +75,6 @@ class Auth(object):
         @self.login_manager.user_loader
         def load_user(user_id):
             return self.User.query.get(user_id)
-
-    def create_templates(self) -> None:
-        templates_of_library: str = path.abspath(
-            __file__
-        ).replace(
-            "main.py",
-            self.template_folder
-        )
-
-        templates_path: str = path.join(
-            self.app.root_path,
-            self.template_folder
-        )
-
-        copy_tree(templates_of_library, templates_path)
 
     def setup_url_rules(self) -> None:
 
@@ -107,3 +99,31 @@ class Auth(object):
         )
 
         self.app.register_blueprint(self.blueprint)
+
+    def create_templates(self) -> None:
+        dirs: List[str] = [
+            self.base_config.TEMPLATES_FOLDER_NAME,
+            self.base_config.STATIC_FOLDER__NAME
+        ]
+        for dir in dirs:
+            dir_path: str = self.get_file_or_dir(dir)
+            if path.isdir(dir_path):
+                rmtree(dir_path)
+
+        with ZipFile(
+            self.get_file_or_dir("templates.zip"),
+            "r"
+        ) as zip_archive:
+            zip_archive.extractall(self.get_file_or_dir(""))
+
+        self.copy_dirs(dirs)
+
+    def copy_dirs(self, dirs: List[str]) -> None:
+        for dir in dirs:
+            copy_tree(
+                self.get_file_or_dir(dir),
+                path.join(self.app.root_path, dir)
+            )
+
+    def get_file_or_dir(self, name: str) -> str:
+        return path.abspath(__file__).replace("main.py", name)
