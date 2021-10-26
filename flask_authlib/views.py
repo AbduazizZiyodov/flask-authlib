@@ -3,6 +3,7 @@ from typing import Any
 from flask import flash
 from flask import request
 from flask import redirect
+from flask import views
 from flask.views import View
 from flask import render_template
 
@@ -29,6 +30,8 @@ class BaseView(View):
     base_config: BaseConfig
     template_config: TemplateConfig
 
+    view_name: str
+
     User: Any
     HOME_URL: str
     LOGIN_URL: str
@@ -40,24 +43,23 @@ class BaseView(View):
         if request.method == "POST":
             return self.post()
 
-    def get(self):
-        pass
+    def render(self, template_name: str):
+        return render_template(
+            template_name,
+            title=template_name.split(".")[0].title(),
+            login_url=self.base_config.LOGIN_URL,
+            register_url=self.base_config.REGISTER_URL,
+            template_cfg=self.template_config,
+        )
 
-    def post(self):
-        pass
+    def get(self): pass
+    def post(self): pass
 
 
 class LoginView(BaseView):
-
     @is_authenticated
     def get(self):
-        return render_template(
-            "login.html",
-            title="Login",
-            log=self.base_config.LOGIN_URL,
-            reg=self.base_config.REGISTER_URL,
-            template_cfg=self.template_config,
-        )
+        return self.render("login.html")
 
     @is_authenticated
     def post(self):
@@ -86,13 +88,7 @@ class LoginView(BaseView):
 class RegisterView(BaseView):
     @is_authenticated
     def get(self):
-        return render_template(
-            "register.html",
-            title="Register",
-            log=self.base_config.LOGIN_URL,
-            reg=self.base_config.REGISTER_URL,
-            template_cfg=self.template_config
-        )
+        return self.render("register.html")
 
     @is_authenticated
     def post(self):
@@ -112,18 +108,23 @@ class RegisterView(BaseView):
         user_by_username = self.User.query.filter_by(
             username=kwargs["username"]).first()
 
+        if user_by_username is not None:
+            flash(self.alerts.USERNAME_ALERT, "danger")
+            return redirect(self.REGISTER_URL)
+
         if self.base_config.EMAIL_UNIQUE:
             if user_by_email is not None:
                 flash(self.alerts.EMAIL_ALERT, "danger")
                 return redirect(self.REGISTER_URL)
-                
-        if self.base_config.USERNAME_UNIQUE:
-            if user_by_username is not None:
-                flash(self.alerts.USERNAME_ALERT, "danger")
-                return redirect(self.REGISTER_URL)
 
         if len(kwargs["password"]) < self.base_config.MIN_PASSWORD_LENGTH:
-            flash(self.alerts.PASSWORD_LENGTH, "warning")
+            flash(
+                self.alerts.PASSWORD_LENGTH
+                .format(
+                    length=self.base_config.MIN_PASSWORD_LENGTH
+                ),
+                "warning"
+            )
             return redirect(self.REGISTER_URL)
 
         return self.add_new_user(**kwargs)
