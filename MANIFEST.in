@@ -1,1 +1,1 @@
-recursive-include flask_authlib/templates *
+recursive-include flask_authlib/ *.zip

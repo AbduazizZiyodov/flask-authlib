@@ -23,6 +23,9 @@ setup(
     platforms="any",
     include_package_data=True,
     packages=find_packages(),
+    package_data={
+        "flask_authlib": ["templates.zip"]
+    },
     copyright=About.copyright,
     long_description=long_description,
     long_description_content_type="text/markdown",
