@@ -3,7 +3,6 @@ from typing import Any
 from flask import flash
 from flask import request
 from flask import redirect
-from flask import views
 from flask.views import View
 from flask import render_template
 
@@ -20,46 +19,69 @@ from .schemas import UserLoginData
 from .schemas import UserRegisterData
 
 from .settings import Alerts
+from .settings import COLORS
 from .settings import BaseConfig
 from .settings import TemplateConfig
 
 
 class BaseView(View):
     db: SQLAlchemy
+    
     alerts: Alerts
     base_config: BaseConfig
     template_config: TemplateConfig
-
-    view_name: str
 
     User: Any
     HOME_URL: str
     LOGIN_URL: str
     REGISTER_URL: str
 
+    TEMPLATE_NAME: str
+
     def dispatch_request(self):
         if request.method == "GET":
             return self.get()
+
         if request.method == "POST":
             return self.post()
 
-    def render(self, template_name: str):
+    @is_authenticated
+    def get(self):
+        return self.render()
+
+    def post(self): pass
+
+    def render(self):
+        password_pattern: str = ".{" + \
+            str(self.base_config.MIN_PASSWORD_LENGTH) + ",}"
+
         return render_template(
-            template_name,
-            title=template_name.split(".")[0].title(),
+            self.TEMPLATE_NAME,
+            title=self.get_title(),
             login_url=self.base_config.LOGIN_URL,
             register_url=self.base_config.REGISTER_URL,
-            template_cfg=self.template_config,
+            settings=self.template_config,
+            password_pattern=password_pattern,
+            static_folder=self.base_config.STATIC_FOLDER_NAME,
+            min_password_length=self.base_config.MIN_PASSWORD_LENGTH,
+            primary_color=self.get_primary_color()
         )
 
-    def get(self): pass
-    def post(self): pass
+    def get_title(self) -> str:
+        return self.TEMPLATE_NAME.split(".")[0].title()
+
+    def get_primary_color(self) -> str:
+        color: str = getattr(
+            self.template_config,
+            self.TEMPLATE_NAME.replace(".html", "").upper()
+            + "_PRIMARY_COLOR"
+        )
+
+        return COLORS.get(color, "primary")
 
 
 class LoginView(BaseView):
-    @is_authenticated
-    def get(self):
-        return self.render("login.html")
+    TEMPLATE_NAME = 'login.html'
 
     @is_authenticated
     def post(self):
@@ -77,7 +99,7 @@ class LoginView(BaseView):
         if user and bcrypt.check_password_hash(
                 user.password_hash, password):
             login_user(user)
-
+            flash("Welcome!", "success")
             return redirect(self.HOME_URL)
 
         flash(self.alerts.LOGIN_FAIL, "danger")
@@ -86,9 +108,7 @@ class LoginView(BaseView):
 
 
 class RegisterView(BaseView):
-    @is_authenticated
-    def get(self):
-        return self.render("register.html")
+    TEMPLATE_NAME = 'register.html'
 
     @is_authenticated
     def post(self):
