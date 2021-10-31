@@ -22,7 +22,7 @@ class BaseConfig:
     TEMPLATES_FILE_NAME: str = "templates.zip"
 
     TEMPLATES_FOLDER_NAME: str = "templates"
-    STATIC_FOLDER__NAME: str = "static"
+    STATIC_FOLDER_NAME: str = "static"
 
     LOGIN_MESSAGE_CATEGORY = "info"
 
@@ -38,7 +38,7 @@ class Alerts:
 
     PASSWORD_LENGTH: str = "Password must be {length} characters long!"
 
-    REGISTER_SUCCESS: str = "Register was successfuly!"
+    REGISTER_SUCCESS: str = "Registration was successful!"
 
     LOGIN_FAIL: str = "The username or password is incorrect!"
 
@@ -49,14 +49,26 @@ class Alerts:
 
 
 class TemplateConfig:
-    LOGIN_BTN: str = "btn-success"
-    REGISTER_BTN: str = "btn-warning"
+    USERNAME_LABEL: str = "Username"
+    PASSWORD_LABEL: str = "Password"
+    EMAIL_LABEL: str = "Email address"
+
+    LOGIN_TITLE: str = "Login"
     LOGIN_BTN_TEXT: str = "Login"
+    LOGIN_PRIMARY_COLOR: str = "red"
+
+    REGISTER_TITLE: str = "Register"
     REGISTER_BTN_TEXT: str = "Register"
-    LOGIN_PAGE_TITLE: str = "Login"
-    REGISTER_PAGE_TITLE: str = "Register"
-    LOGIN_LABEL_USERNAME: str = "Username"
-    LOGIN_LABEL_PASSWORD: str = "Password"
-    REGISTER_LABEL_USERNAME: str = "Username"
-    REGISTER_LABEL_PASSWORD: str = "Password"
-    REGISTER_LABEL_EMAIL: str = "Email address"
+    REGISTER_PRIMARY_COLOR: str = "yellow"
+
+
+COLORS: dict = {
+    "blue": "primary",
+    "violet": "secondary",
+    "green": "success",
+    "red": "danger",
+    "yellow": "warning",
+    "light-blue": "info",
+    "white": "light",
+    "black": "dark"
+}
