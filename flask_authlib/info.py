@@ -2,7 +2,7 @@ class About:
     license = 'MIT'
     name = 'Flask-Authlib'
     author = 'Abduaziz Ziyodov'
-    version_info = ('1', '4', '0')
+    version_info = ('1', '5', '0')
     version = '.'.join(version_info)
     author_email = 'abduaziz.ziyodov@mail.ru'
     copyright = '(c) 2021 by Abduaziz Ziyodov'
