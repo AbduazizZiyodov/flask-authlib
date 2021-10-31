@@ -1,4 +1,8 @@
+import secrets
+
 from typing import Callable
+
+from flask import Flask
 
 from flask import request
 from flask import redirect
@@ -12,13 +16,17 @@ from flask_sqlalchemy import SQLAlchemy
 from pydantic import ValidationError
 from pydantic.main import ModelMetaclass
 
+from .settings import BaseConfig
+
 
 bcrypt = Bcrypt()
 
 
 def validate_request_body(schema: ModelMetaclass) -> bool:
     try:
-        return bool(schema.parse_obj(request.form.to_dict()))
+        return bool(
+            schema.parse_obj(request.form.to_dict())
+        )
     except ValidationError:
         return False
 
@@ -45,3 +53,15 @@ def is_authenticated(function) -> Callable:
 
 def check_table_name(db: SQLAlchemy, table_name: str) -> bool:
     return table_name in db.engine.table_names()
+
+
+def set_flask_app_config(app: Flask, config: BaseConfig) -> None:
+    config: dict = dict(
+        SECRET_KEY=secrets.token_hex(),
+        STATIC_FOLDER=config.STATIC_FOLDER_NAME,
+        SQLALCHEMY_ECHO=False,
+        SQLALCHEMY_TRACK_MODIFICATIONS=False
+    )
+
+    for key, value in config.items():
+        app.config[key] = value

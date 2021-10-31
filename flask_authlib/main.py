@@ -1,5 +1,3 @@
-import secrets
-
 from os import path
 from shutil import rmtree
 
@@ -17,6 +15,7 @@ from .views import *
 from .models import get_user_model
 from .utils import check_table_name
 from .utils import initalize_base_view
+from .utils import set_flask_app_config
 
 from .settings import Alerts
 from .settings import BaseConfig
@@ -50,14 +49,13 @@ class Auth(object):
         self.setup()
 
     def setup(self) -> None:
-        if not check_table_name(self.db, self.base_config.TABLENAME):
+        if not check_table_name(
+            self.db,
+            self.base_config.TABLENAME
+        ):
             self.db.create_all()
 
-        self.app.config.update(
-            TEMPLATES_AUTO_RELOAD=True,
-            STATIC_FOLDER=self.base_config.STATIC_FOLDER__NAME,
-            SECRET_KEY=secrets.token_hex()
-        )
+        set_flask_app_config(self.app, self.base_config)
 
         self.create_templates()
         self.setup_flask_login()
@@ -66,8 +64,7 @@ class Auth(object):
     def setup_flask_login(self) -> None:
         self.login_manager = LoginManager(self.app)
 
-        self.login_manager.login_view = \
-            self.blueprint_name + "." + self.base_config.login["name"]
+        self.login_manager.login_view = self.get_login_view_name()
 
         self.login_manager.login_message_category =\
             self.base_config.LOGIN_MESSAGE_CATEGORY
@@ -103,8 +100,9 @@ class Auth(object):
     def create_templates(self) -> None:
         dirs: List[str] = [
             self.base_config.TEMPLATES_FOLDER_NAME,
-            self.base_config.STATIC_FOLDER__NAME
+            self.base_config.STATIC_FOLDER_NAME
         ]
+        
         for dir in dirs:
             dir_path: str = self.get_file_or_dir(dir)
             if path.isdir(dir_path):
@@ -127,3 +125,6 @@ class Auth(object):
 
     def get_file_or_dir(self, name: str) -> str:
         return path.abspath(__file__).replace("main.py", name)
+
+    def get_login_view_name(self) -> str:
+        return self.blueprint_name + "." + self.base_config.login["name"]
