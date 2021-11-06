@@ -3,3 +3,5 @@ __pycache__/
 build/
 dist/
 flask_authlib.egg-info/
+example/
+tests/
