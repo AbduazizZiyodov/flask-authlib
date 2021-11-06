@@ -12,8 +12,8 @@
 
 Flask uses the `Jinja` template engine for rendering **HTML** files. By defining your `Flask` application, it sets the default path of templates dir ( it is templates/` ).
 
-- [*] Import `render_template` function from `flask` on your code.
-- [*] Create `templates/` directory and any `*.html` file.
+- [x] Import `render_template` function from `flask` on your code.
+- [x] Create `templates/` directory and any `*.html` file.
 
 !!! question "Rendering Templates"
 
