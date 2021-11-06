@@ -1,13 +1,17 @@
 site_name: Flask-Authlib
 site_url: http://abduazizziyodov.github.io/flask_authlib
 site_description: Flask-Authlib - Authentication Library For Flask Web Framework 🔥
+
 repo_name: flask-authlib
 repo_url: https://github.com/AbduazizZiyodov/flask-authlib
+
 edit_uri: ""
 
 theme:
+  favicon: assets/favicon.ico
+
   icon:
-    logo: material/account-lock
+    logo: fontawesome/brands/python
     admonition:
       note: octicons/tag-16
       abstract: octicons/checklist-16
@@ -21,6 +25,7 @@ theme:
       bug: octicons/bug-16
       example: octicons/beaker-16
       quote: octicons/quote-16
+
   name: material
   palette:
     - scheme: default
@@ -35,14 +40,17 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
+
   features:
-    - header.autohide
-    - navigation.sections
-    - navigation.expand
+    - search.suggest
+    - search.highlight
     - content.tabs.link
+    - navigation.top
+
 plugins:
   - search:
       lang: en
+
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -52,16 +60,31 @@ extra:
       link: https://t.me/AbduazizZiyodov
       name: Author's Telegram Account
 copyright: Copyright &copy; 2021 Abduaziz Ziyodov
+
 markdown_extensions:
   - admonition
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
   - pymdownx.inlinehilite
   - pymdownx.superfences
   - pymdownx.snippets
   - pymdownx.details
   - pymdownx.superfences
+
   - pymdownx.tabbed:
       alternate_style: true
+
 nav:
-  - index.md
-  - intro_to_flask.md
+  - Home: index.md
+  - Basics of flask:
+      - flask_tutorials/getting_started.md
+      - flask_tutorials/running_application.md
+      - flask_tutorials/routing.md
+      - flask_tutorials/http_methods.md
+      - flask_tutorials/templates.md
+      - flask_tutorials/request_handling.md
+extra_css:
+  - css/custom.css
