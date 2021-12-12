@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/routing/">
+        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/user-guide/basic_usage/">
       
       <link rel="icon" href="../../assets/favicon.ico">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
     
     
       
-        <title>Routing - Flask-Authlib</title>
+        <title>Basic Usage of Library - Flask-Authlib</title>
       
     
     
@@ -67,11 +67,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#routing" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -101,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Routing
+              Basic Usage of Library
             
           </span>
         </div>
@@ -248,12 +243,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -274,11 +271,19 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../user-guide/basic_usage/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Basic Usage of Library
       </a>
+      
     </li>
   
 
@@ -316,7 +321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/base_config/" class="md-nav__link">
+      <a href="../base_config/" class="md-nav__link">
         Customize Base Settings
       </a>
     </li>
@@ -330,7 +335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/alerts_config/" class="md-nav__link">
+      <a href="../alerts_config/" class="md-nav__link">
         Customize Alerts
       </a>
     </li>
@@ -344,7 +349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/templates_config/" class="md-nav__link">
+      <a href="../templates_config/" class="md-nav__link">
         Customize Templates
       </a>
     </li>
@@ -371,14 +376,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -401,7 +404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../../flask_tutorials/getting_started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -415,7 +418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../running_application/" class="md-nav__link">
+      <a href="../../flask_tutorials/running_application/" class="md-nav__link">
         Running Application
       </a>
     </li>
@@ -427,21 +430,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../flask_tutorials/routing/" class="md-nav__link">
         Routing
       </a>
-      
     </li>
   
 
@@ -453,7 +446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http_methods/" class="md-nav__link">
+      <a href="../../flask_tutorials/http_methods/" class="md-nav__link">
         HTTP methods
       </a>
     </li>
@@ -467,7 +460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../templates/" class="md-nav__link">
+      <a href="../../flask_tutorials/templates/" class="md-nav__link">
         Templates
       </a>
     </li>
@@ -481,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../request_handling/" class="md-nav__link">
+      <a href="../../flask_tutorials/request_handling/" class="md-nav__link">
         Handling HTTP Requests
       </a>
     </li>
@@ -502,44 +495,23 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
 
-<h1 id="routing">Routing</h1>
-<p>The route that we wrote in the previous tutorial, is <strong>Static Route</strong>.
-If we want to create a profile page for our users, our web service should generate URLs of their profiles dynamically. We cannot solve this by using static routes. We have to create dynamic routes (variable rules ...)</p>
-<p>Simple logic for profile page:</p>
+  <h1>Basic Usage of Library</h1>
+
+<p><code>Flask-Authlib</code> uses <code>SQLAlchemy</code>(sqlalchemy extension for flask) for the database part. After installation this ORM, you should import <code>Auth</code> and use it like this:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># users/:user_id</span>
-
-<span class="k">def</span> <span class="nf">profile_view</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
-    <span class="c1"># logic ...</span>
-</code></pre></div>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
+</span></code></pre></div>
 </td></tr></table>
-<p>For these dynamic routes, we should write the dynamic URL rules like this:</p>
+<p>Define your <code>Flask application</code>, <code>db</code> and <code>Auth</code> base object:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -550,49 +522,93 @@ If we want to create a profile page for our users, our web service should genera
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="n">DEBUG</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">SQLALCHEMY_DATABASE_URI</span><span class="o">=</span><span class="s2">&quot;sqlite:///database.db&quot;</span>
+<span class="hll"><span class="p">)</span>
+</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
-<span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/users/&lt;user_id&gt;&quot;</span><span class="p">)</span>
-</span><span class="hll"><span class="k">def</span> <span class="nf">profile_view</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
-</span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span><span class="sa">f</span><span class="s2">&quot;👨‍💻 USER_ID is </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<div class="admonition info">
+<p class="admonition-title"><code>flask_authlib.Auth</code></p>
+<p><code>Auth</code> takes two arguments(required): <code>app</code> (Flask App) and <code>db</code> (SQLAlchemy).</p>
+</div>
+<p>Add simple route and protect it by flask login's <code>login_required</code> decorator for testing login functionality:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_required</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="n">DEBUG</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">SQLALCHEMY_DATABASE_URI</span><span class="o">=</span><span class="s2">&quot;sqlite:///database.db&quot;</span>
+<span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+
+
+<span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/protected&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="nd">@login_required</span>
+</span><span class="k">def</span> <span class="nf">protected</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">&quot;HI, I&#39;M PROTECTED 👋&quot;</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
-<p>By defining our URL rule within <code>&lt; ... &gt;</code>, it indicates a variable. They can be type-checked by adding a colon(<code>:</code>). There are data types that routes can accept:</p>
-<div class="admonition info">
-<p class="admonition-title">Variable Rules</p>
-<ul>
-<li><code>string</code> - (default) accepts any text without a slash</li>
-<li><code>int</code> - accepts positive integers</li>
-<li><code>float</code> - accepts positive floating point values</li>
-<li><code>path</code> - like string but also accepts slashes</li>
-<li><code>uuid</code> -accepts UUID strings</li>
+<blockquote>
+<p>If we try to navigate <code>/protected</code>, it should navigate us to the login page. That is why we used flask_login's <code>@login_required</code>.</p>
+</blockquote>
+<p>Next, run your flask application and you will see <code>magic</code> things 😂 (navigate to protected route):</p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Login Page
+<img alt="LOGIN_PAGE" src="../../assets/screenshots/12.PNG" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Register Page
+<img alt="REGISTER_PAGE" src="../../assets/screenshots/13.PNG" />
+Tada 🎉</p>
+</li>
 </ul>
-<p>Variable Rules should be given as the view function's argument.</p>
-</div>
-<p><img alt="USER_ID_TEST" src="../../assets/screenshots/4.PNG" /></p>
-<div class="admonition tip">
-<p class="admonition-title">ProTips</p>
-<ul>
-<li>You can handle multiple routes with a single function by simply stacking additional route decorators above any route!
-    <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/home&quot;</span><span class="p">)</span>
-</span><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/something&quot;</span><span class="p">)</span>
-</span><span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s2">&quot;Hello Bro 👋&quot;</span>
-</code></pre></div>
-</td></tr></table></li>
+<p>If we look our application's directory, we can see new folders which are created by <code>flask_authlib</code>:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> <code>static/</code> - stores static files ( <code>js</code>, <code>css</code>, <code>fonts</code> ... )</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> <code>templates/</code> - stores <code>*.html</code> files</li>
 </ul>
-</div>
 
               
             </article>
@@ -611,7 +627,7 @@ If we want to create a profile page for our users, our web service should genera
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../running_application/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Running Application" rel="prev">
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Intro" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -620,20 +636,20 @@ If we want to create a profile page for our users, our web service should genera
               <span class="md-footer__direction">
                 Previous
               </span>
-              Running Application
+              Intro
             </div>
           </div>
         </a>
       
       
         
-        <a href="../http_methods/" class="md-footer__link md-footer__link--next" aria-label="Next: HTTP methods" rel="next">
+        <a href="../base_config/" class="md-footer__link md-footer__link--next" aria-label="Next: Customize Base Settings" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              HTTP methods
+              Customize Base Settings
             </div>
           </div>
           <div class="md-footer__button md-icon">
