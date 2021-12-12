@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>http://abduazizziyodov.github.io/flask_authlib/</loc>
-         <lastmod>2021-11-06</lastmod>
+         <lastmod>2021-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/getting_started/</loc>
-         <lastmod>2021-11-06</lastmod>
+         <lastmod>2021-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/http_methods/</loc>
-         <lastmod>2021-11-06</lastmod>
+         <lastmod>2021-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/request_handling/</loc>
-         <lastmod>2021-11-06</lastmod>
+         <lastmod>2021-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/routing/</loc>
-         <lastmod>2021-11-06</lastmod>
+         <lastmod>2021-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/running_application/</loc>
-         <lastmod>2021-11-06</lastmod>
+         <lastmod>2021-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/templates/</loc>
-         <lastmod>2021-11-06</lastmod>
+         <lastmod>2021-12-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
