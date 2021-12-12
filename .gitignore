@@ -1,7 +1,9 @@
+flask_authlib.egg-info/
 __pycache__/
 .vscode/
-build/
-dist/
-flask_authlib.egg-info/
 example/
-tests/
+build/
+venv/
+dist/
+env/
+.env
