@@ -78,13 +78,20 @@ markdown_extensions:
       alternate_style: true
 
 nav:
-  - Home: index.md
-  - Basics of flask:
+  - Intro: index.md
+  - Tutorial - User Guide:
+      - Basic Usage of Library: user-guide/basic_usage.md
+      - Customization:
+          - Customize Base Settings: user-guide/base_config.md
+          - Customize Alerts: user-guide/alerts_config.md
+          - Customize Templates: user-guide/templates_config.md
+  - Flask For Beginners:
       - flask_tutorials/getting_started.md
       - flask_tutorials/running_application.md
       - flask_tutorials/routing.md
       - flask_tutorials/http_methods.md
       - flask_tutorials/templates.md
       - flask_tutorials/request_handling.md
+
 extra_css:
   - css/custom.css

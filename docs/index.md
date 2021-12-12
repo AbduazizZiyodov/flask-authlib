@@ -1,4 +1,4 @@
-# 🏡 Home Page
+# **Welcome 👋**
 
 <h1 align="center"><b>Flask-Authlib 🔐</b></h1>
 
@@ -8,8 +8,6 @@
 </p>
 
 <p align="center">
-    Welcome 👋
-    <br>
     <b>Flask-Authlib</b> - Authentication Library For Flask Web Framework 🔥
 </p>
 
@@ -88,8 +86,21 @@ Requires: ...
 
 ```
 
-If you are a beginner in flask development, you can learn the basics of the flask on the next page 🙂
+# **✨ Features**
 
-!!! info "License"
+!!! success "Goal of Project"
 
-    This project is licensed under the terms of the MIT license.
+    To allow python developers to add authentication functionality with one line of code!
+
+- [x] Library adds built-in `frontend` and `backend` that implements authentication functionality to your flask application automatically.
+
+- [x] The login and registration pages are ready for use. After starting and initializing your flask application templates (`templates/`) and static (`static/`) files will be copied on your app's folder (if you want, you can change these files any time).
+
+- [x] Better customization! You can customize this library by its configs. There are three types of configs:
+  - **Base** config
+  - **Templates** config
+  - **Alerts** config (alert messages)
+
+!!! help "Flask For Beginners"
+
+    If you are a beginner in flask development, you can learn the basics of the flask on the `Flask For Beginners` section 🙂
