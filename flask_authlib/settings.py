@@ -72,3 +72,13 @@ COLORS: dict = {
     "white": "light",
     "black": "dark"
 }
+
+class JwtConfig:
+    LOGIN_URL:str = "/login"
+    REGISTER_URL:str = "/register"  
+
+    TABLENAME:str = "users"
+
+    MIN_PASSWORD_LENGTH: int = 8
+    
+
