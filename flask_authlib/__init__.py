@@ -1,5 +1,5 @@
-from .jwt import JWT
 from .main import Auth
+from .jwt import JWT
 
 from .settings import Alerts
 from .settings import BaseConfig
