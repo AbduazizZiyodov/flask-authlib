@@ -2,6 +2,8 @@ from os import path
 from shutil import rmtree
 
 from typing import List
+from typing import Optional
+from typing import NoReturn
 
 from zipfile import ZipFile
 from distutils.dir_util import copy_tree
@@ -12,10 +14,10 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
 from .views import *
-from .models import get_user_model
 from .utils import check_table_name
 from .utils import initalize_base_view
 from .utils import set_flask_app_config
+from .database.models import get_user_model
 
 from .settings import Alerts
 from .settings import BaseConfig
@@ -27,12 +29,15 @@ class Auth(object):
         self,
         app: Flask,
         db: SQLAlchemy,
-        alerts: Alerts = Alerts,
-        base_config: BaseConfig = BaseConfig,
-        template_config: TemplateConfig = TemplateConfig,
-    ) -> None:
+        alerts: Optional[Alerts] = Alerts,
+        base_config: Optional[BaseConfig] = BaseConfig,
+        template_config: Optional[TemplateConfig] = TemplateConfig,
+        auto_replace_folder: Optional[bool] = True,
+    ) -> NoReturn:
 
         self.app, self.db = app, db
+
+        self.auto_replace_folder: bool = auto_replace_folder
 
         self.alerts = alerts
         self.base_config = base_config
@@ -48,7 +53,7 @@ class Auth(object):
 
         self.setup()
 
-    def setup(self) -> None:
+    def setup(self) -> NoReturn:
         if not check_table_name(
             self.db,
             self.base_config.TABLENAME
@@ -79,20 +84,17 @@ class Auth(object):
 
         self.blueprint.add_url_rule(
             rule=self.base_config.LOGIN_URL,
-            view_func=LoginView.as_view(self.base_config.login["name"]),
-            methods=["GET", "POST"]
+            view_func=LoginView.as_view(self.base_config.login["name"])
         )
 
         self.blueprint.add_url_rule(
             rule=self.base_config.REGISTER_URL,
-            view_func=RegisterView.as_view(self.base_config.register["name"]),
-            methods=["GET", "POST"]
+            view_func=RegisterView.as_view(self.base_config.register["name"])
         )
 
         self.blueprint.add_url_rule(
             rule=self.base_config.LOGOUT_URL,
-            view_func=LogoutView.as_view(self.base_config.logout["name"]),
-            methods=["GET", "POST"]
+            view_func=LogoutView.as_view(self.base_config.logout["name"])
         )
 
         self.app.register_blueprint(self.blueprint)
@@ -102,7 +104,7 @@ class Auth(object):
             self.base_config.TEMPLATES_FOLDER_NAME,
             self.base_config.STATIC_FOLDER_NAME
         ]
-        
+
         for dir in dirs:
             dir_path: str = self.get_file_or_dir(dir)
             if path.isdir(dir_path):
@@ -114,9 +116,10 @@ class Auth(object):
         ) as zip_archive:
             zip_archive.extractall(self.get_file_or_dir(""))
 
-        self.copy_dirs(dirs)
+        if self.auto_replace_folder:
+            self.copy_dirs(dirs)
 
-    def copy_dirs(self, dirs: List[str]) -> None:
+    def copy_dirs(self, dirs: List[str]) -> NoReturn:
         for dir in dirs:
             copy_tree(
                 self.get_file_or_dir(dir),
