@@ -11,3 +11,10 @@ class RegisterData(BaseModel):
 class LoginData(BaseModel):
     username: str
     password: str
+
+
+class User(BaseModel):
+    id: int
+    username: str
+    email: EmailStr
+    password_hash: str
