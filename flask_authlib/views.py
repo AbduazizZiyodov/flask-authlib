@@ -3,20 +3,21 @@ from typing import Any
 from flask import flash
 from flask import request
 from flask import redirect
-from flask.views import View
 from flask import render_template
+from flask.views import MethodView
 
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_login import login_user
 from flask_login import logout_user
 
-from .utils import bcrypt
-from .utils import is_authenticated
-from .utils import validate_request_body
+from flask_bcrypt import Bcrypt
 
-from .schemas import UserLoginData
-from .schemas import UserRegisterData
+from .utils import validate_form_request
+from .utils import redirect_if_authenticated
+
+from .schemas import LoginData
+from .schemas import RegisterData
 
 from .settings import Alerts
 from .settings import COLORS
@@ -24,9 +25,12 @@ from .settings import BaseConfig
 from .settings import TemplateConfig
 
 
-class BaseView(View):
+bcrypt = Bcrypt()
+
+
+class BaseView(MethodView):
     db: SQLAlchemy
-    
+
     alerts: Alerts
     base_config: BaseConfig
     template_config: TemplateConfig
@@ -38,18 +42,11 @@ class BaseView(View):
 
     TEMPLATE_NAME: str
 
-    def dispatch_request(self):
-        if request.method == "GET":
-            return self.get()
+    methods = ["GET", "POST"]
 
-        if request.method == "POST":
-            return self.post()
-
-    @is_authenticated
+    @redirect_if_authenticated
     def get(self):
         return self.render()
-
-    def post(self): pass
 
     def render(self):
         password_pattern: str = ".{" + \
@@ -77,15 +74,15 @@ class BaseView(View):
             + "_PRIMARY_COLOR"
         )
 
-        return COLORS.get(color, "primary")
+        return COLORS.get(color, "primary").lower()
 
 
 class LoginView(BaseView):
     TEMPLATE_NAME = 'login.html'
 
-    @is_authenticated
+    @redirect_if_authenticated
     def post(self):
-        if not validate_request_body(UserLoginData):
+        if not validate_form_request(LoginData):
             flash(self.alerts.BAD_REQUEST, "danger")
             return redirect(self.LOGIN_URL)
 
@@ -110,9 +107,9 @@ class LoginView(BaseView):
 class RegisterView(BaseView):
     TEMPLATE_NAME = 'register.html'
 
-    @is_authenticated
+    @redirect_if_authenticated
     def post(self):
-        if not validate_request_body(UserRegisterData):
+        if not validate_form_request(RegisterData):
             flash(self.alerts.BAD_REQUEST, "danger")
 
             return redirect(self.REGISTER_URL)
