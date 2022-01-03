@@ -1,3 +1,6 @@
+import secrets
+
+
 class BaseConfig:
     HOME_URL: str = "/"
     LOGIN_URL: str = "/login"
@@ -73,12 +76,13 @@ COLORS: dict = {
     "black": "dark"
 }
 
+
 class JwtConfig:
-    LOGIN_URL:str = "/login"
-    REGISTER_URL:str = "/register"  
+    LOGIN_URL: str = "/login"
+    REGISTER_URL: str = "/register"
 
-    TABLENAME:str = "users"
-
+    TABLENAME: str = "users"
     MIN_PASSWORD_LENGTH: int = 8
-    
 
+    TOKEN_LIFETIME: int = 60*60  # seconds
+    SECRET_KEY: str = secrets.token_hex()
