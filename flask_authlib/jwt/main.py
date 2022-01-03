@@ -1,5 +1,3 @@
-import secrets
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -34,7 +32,7 @@ class JWT(object):
         ):
             self.db.create_all()
 
-        self.app.config["SECRET_KEY"] = secrets.token_hex()
+        self.app.config["SECRET_KEY"] = self.settings.SECRET_KEY
         self.setup_url_rules()
 
     def setup_url_rules(self):
