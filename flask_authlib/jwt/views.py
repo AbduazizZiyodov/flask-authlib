@@ -1,12 +1,15 @@
+import jwt
+
 from typing import Any
 
+from datetime import datetime
+from datetime import timedelta
+
 from flask import jsonify
-from flask import request
 from flask.views import MethodView
 from flask_sqlalchemy import SQLAlchemy
 
-from werkzeug.security import check_password_hash
-from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from ..settings import JwtConfig
 
@@ -21,6 +24,58 @@ class BaseJwtView(MethodView):
     db: SQLAlchemy
     app_config: dict
     settings: JwtConfig
+
+    def encode_jwt(self, user_id: int):
+        expiration_time: int = self.settings.TOKEN_LIFETIME
+        secret_key: str = self.settings.SECRET_KEY
+
+        try:
+            payload: dict = {
+                "exp": datetime.utcnow() + timedelta(seconds=expiration_time),
+                "iat": datetime.utcnow(),
+                "sub": user_id
+            }
+
+            return jwt.encode(payload, secret_key, algorithm="HS256")
+
+        except Exception as e:
+            return jsonify({"success": False, "message": "An error occurred!"}), 500
+
+    def decode_jwt(self, token: str):
+        secret_key: str = self.settings.SECRET_KEY
+        try:
+            payload = jwt.decode(token, secret_key)
+            return payload["sub"]
+
+        except jwt.ExpiredSignatureError:
+            return jsonify(
+                {
+                    "success": False,
+                    "message": "Signature expired. Please log in again."
+                }
+            ), 401
+        except jwt.DecodeError:
+            return jsonify(
+                {
+                    "success": False,
+                    "message": "Error decoding token!"
+                }
+            ), 401
+
+        except jwt.InvalidTokenError:
+            return jsonify(
+                {
+                    "success": False,
+                    "message": "Invalid token. Please log in again."
+                }
+            ), 401
+        except Exception:
+            return jsonify(
+                {
+                    "success": False,
+                    "message": "Unable to parse jwt token!"
+                }
+            ), 401
 
 
 class JWTRegister(BaseJwtView):
@@ -58,7 +113,7 @@ class JWTRegister(BaseJwtView):
             username=data.username,
             password_hash=password_hash
         )
-        
+
         self.db.session.add(user)
         self.db.session.commit()
 
@@ -73,7 +128,28 @@ class JWTRegister(BaseJwtView):
 class JWTLogin(BaseJwtView):
     @validate_json_request(LoginData)
     def post(self, data: LoginData):
-        return {"data": data.dict()}
+        user = self.User.query.filter_by(
+            username=data.username
+        ).first()
+
+        if user is None:
+            return jsonify(
+                {
+                    "success": False,
+                    "message": "No user found with given username!"
+                }
+            ), 401
+
+        if check_password_hash(user.password_hash, data.password):
+            return jsonify({
+                "access_token": self.encode_jwt(user.id)
+            }), 200
+        return jsonify(
+            {
+                "success": False,
+                "message": "No user found with given username!"
+            }
+        ), 401
 
 
 __all__ = ["BaseJwtView", "JWTRegister", "JWTLogin"]
