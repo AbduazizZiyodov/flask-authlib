@@ -24,7 +24,7 @@ setup(
     include_package_data=True,
     packages=find_packages(),
     package_data={
-        "flask_authlib": ["templates.zip"]
+        "flask_authlib": ["templates.zip", "database", "jwt"]
     },
     copyright=About.copyright,
     long_description=long_description,
