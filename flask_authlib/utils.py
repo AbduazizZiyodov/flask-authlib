@@ -34,8 +34,12 @@ def validate_json_request(Model: BaseModel) -> Callable:
         def wrapper(*args, **kwargs) -> Union[Response, Callable]:
             request_body: dict = request.get_json()
 
+            if request_body is None:
+                return {"message": "Empty request body"}, 400
+
             try:
                 data = Model(**request_body)
+
                 kwargs["data"] = data
                 return f(*args, **kwargs)
 
