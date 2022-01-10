@@ -1,23 +1,22 @@
-import jwt
-
 from typing import Any
-
-from datetime import datetime
-from datetime import timedelta
 
 from flask import jsonify
 from flask.views import MethodView
 from flask_sqlalchemy import SQLAlchemy
 
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 
 from ..settings import JwtConfig
 
+from ..schemas import User
 from ..schemas import LoginData
 from ..schemas import RegisterData
 
 from .utils import encode_jwt
 from ..utils import validate_json_request
+
+from .exceptions import AuthErrorException
 
 
 class BaseJwtView(MethodView):
@@ -38,22 +37,21 @@ class JWTRegister(BaseJwtView):
             username=data.username
         ).first()
 
-        error_message = "User with that {} is already exists!"
-
         if user_by_email:
-            return jsonify({"success": False, "message": error_message.format("email")}), 400
+            raise AuthErrorException(self.settings.alerts.EMAIL_ALERT, 400)
+
         if user_by_username:
-            return jsonify({"success": False, "message": error_message.format("username")}), 400
+            raise AuthErrorException(self.settings.alerts.EMAIL_ALERT, 400)
 
         min_password_length: str = self.settings.MIN_PASSWORD_LENGTH
 
         if len(data.password) < min_password_length:
-            return jsonify(
-                {
-                    "success": False,
-                    "message": f"Password must be {min_password_length} characters long!"
-                }
-            ), 400
+            raise AuthErrorException(
+                self.settings.alerts.PASSWORD_LENGTH.format(
+                    min_password_length
+                ),
+                400
+            )
 
         password_hash = generate_password_hash(data.password)
 
@@ -68,7 +66,7 @@ class JWTRegister(BaseJwtView):
         return jsonify(
             {
                 "success": True,
-                "message": "User successfully registered!"
+                "message": self.settings.alerts.REGISTER_SUCCESS
             }
         ), 200
 
@@ -81,25 +79,29 @@ class JWTLogin(BaseJwtView):
         ).first()
 
         if user is None:
-            return jsonify(
-                {
-                    "success": False,
-                    "message": "No user found with given username!"
-                }
-            ), 401
+
+            raise AuthErrorException(
+                self.settings.alerts.LOGIN_FAIL
+            )
 
         if check_password_hash(user.password_hash, data.password):
+            data = User(
+                id=user.id,
+                username=user.username,
+                email=user.email,
+                password_hash=user.password_hash,
+                is_admin=user.is_admin()
+            )
+
             return jsonify(
                 {
-                    "access_token": encode_jwt(user.id, self.settings)
+                    "access_token": encode_jwt(data, self.settings)
                 }
             ), 200
-        return jsonify(
-            {
-                "success": False,
-                "message": "No user found with given username!"
-            }
-        ), 401
+
+        raise AuthErrorException(
+            self.settings.alerts.LOGIN_FAIL
+        )
 
 
 __all__ = ["BaseJwtView", "JWTRegister", "JWTLogin"]
