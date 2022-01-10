@@ -1,4 +1,6 @@
+import rich
 import json
+import click
 import secrets
 
 from typing import Union
@@ -11,6 +13,8 @@ from flask import redirect
 from flask import Response
 from flask.views import View
 
+from werkzeug.security import generate_password_hash
+
 from flask_login import current_user
 from flask_sqlalchemy import SQLAlchemy
 
@@ -18,6 +22,8 @@ from pydantic import BaseModel
 from pydantic import ValidationError
 
 from .settings import BaseConfig
+from .settings import JwtConfig
+from .database.models import get_user_model
 
 
 def validate_form_request(Model: BaseModel) -> bool:
@@ -94,3 +100,70 @@ def set_flask_app_config(app: Flask, config: BaseConfig) -> None:
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         STATIC_FOLDER=config.STATIC_FOLDER_NAME
     )
+
+
+def get_create_admin_function(
+    db: SQLAlchemy,
+    settings: Union[BaseConfig, JwtConfig]
+) -> Callable:
+    """
+    Returns function for Flask app's CLI that allows to create superusers
+    """
+    UserModel = get_user_model(db, settings.TABLENAME)
+    error_message = "[bold red] \nUser with that {} is already exists!"
+    min_password_length = settings.MIN_PASSWORD_LENGTH
+
+    def create_admin_user(email: str, username: str, password: str):
+        user_by_email = UserModel.query.filter_by(
+            email=email
+        ).first()
+
+        user_by_username = UserModel.query.filter_by(
+            username=username
+        ).first()
+
+        if user_by_email:
+            rich.print(
+                error_message.format("email"),
+
+            )
+            return None, False
+
+        if user_by_username:
+            rich.print(
+                error_message.format("username"),
+            )
+            return None, False
+
+        if len(password) < min_password_length:
+            rich.print(
+                f"[bold yellow] Password must be {min_password_length} characters long!",
+            )
+            return None, False
+
+        password_hash = generate_password_hash(password)
+
+        new_user = UserModel(
+            email=email,
+            username=username,
+            password_hash=password_hash,
+            admin=True
+        )
+
+        new_user.insert()
+
+        rich.print(
+            "[bold green] Superuser is created :tada:",
+        )
+
+    return create_admin_user
+
+
+def add_create_admin_command(app: Flask, function: Callable):
+    @app.cli.command("create-admin")
+    @click.argument("email")
+    @click.argument("username")
+    @click.argument("password")
+    def create_admin(email: str, username: str, password: str):
+        function(email, username, password)
+        return

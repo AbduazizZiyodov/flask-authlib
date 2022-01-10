@@ -2,7 +2,6 @@ from typing import Callable
 
 from flask import Flask
 from flask import request
-from flask.json import jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 from werkzeug.datastructures import EnvironHeaders
@@ -17,6 +16,8 @@ from .views import BaseJwtView
 from .utils import decode_jwt
 from ..utils import check_table_name
 from ..utils import init_base_jwt_view
+from ..utils import add_create_admin_command
+from ..utils import get_create_admin_function
 
 from .exceptions import AuthErrorException
 from .exceptions import auth_error_handler
@@ -45,6 +46,9 @@ class JWT(object):
 
         self.app.config["SECRET_KEY"] = self.settings.SECRET_KEY
         self.app.register_error_handler(AuthErrorException, auth_error_handler)
+        func = get_create_admin_function(self.db, self.settings)
+        add_create_admin_command(self.app, func)
+
         self.setup_url_rules()
 
     def setup_url_rules(self):
@@ -60,31 +64,27 @@ class JWT(object):
             view_func=JWTLogin.as_view("jwt_login")
         )
 
-    def jwt_required(self, f: Callable):
-        def decorator(*args, **kwargs):
+    def jwt_required(self, func: Callable):
+        def decorator(*args, **kwargs) -> Callable:
             headers: EnvironHeaders = request.headers
             authorization: str = headers.get("Authorization")
 
             if not authorization:
                 raise AuthErrorException(
-                    "Authorization(JWT token) not in the header")
+                    "Authorization(JWT token) not in the header"
+                )
 
             jwt_token: str = authorization.split(" ")
 
             if jwt_token[0].lower() != "bearer" or len(jwt_token) != 2:
                 raise AuthErrorException(
-                    "Check your authorization header!!!")
-                    
+                    "Check your authorization header!!!"
+                )
+
             jwt_token: str = jwt_token[1]
-            user_id = decode_jwt(jwt_token, self.settings.SECRET_KEY)
-            user = self.User.query.filter_by(id=user_id).first()
+            user_data = decode_jwt(jwt_token, self.settings.SECRET_KEY)
 
-            kwargs["user"] = User(
-                id=user.id,
-                username=user.username,
-                email=user.email,
-                password_hash=user.password_hash
+            kwargs["user"] = User(**user_data)
+            return func(*args, **kwargs)
 
-            )
-            return f(*args, **kwargs)
         return decorator

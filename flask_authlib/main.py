@@ -1,3 +1,5 @@
+import click
+
 from os import path
 from shutil import rmtree
 
@@ -17,6 +19,8 @@ from .views import *
 from .utils import check_table_name
 from .utils import initalize_base_view
 from .utils import set_flask_app_config
+from .utils import add_create_admin_command
+from .utils import get_create_admin_function
 from .database.models import get_user_model
 
 from .settings import Alerts
@@ -33,7 +37,7 @@ class Auth(object):
         base_config: Optional[BaseConfig] = BaseConfig,
         template_config: Optional[TemplateConfig] = TemplateConfig,
         auto_replace_folder: Optional[bool] = True,
-    ) -> NoReturn:
+    ) -> None:
 
         self.app, self.db = app, db
 
@@ -61,6 +65,9 @@ class Auth(object):
             self.db.create_all()
 
         set_flask_app_config(self.app, self.base_config)
+
+        func = get_create_admin_function(self.db, self.base_config)
+        add_create_admin_command(self.app, func)
 
         self.create_templates()
         self.setup_flask_login()
