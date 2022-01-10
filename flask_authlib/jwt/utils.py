@@ -6,11 +6,12 @@ from flask import Response
 from datetime import datetime
 from datetime import timedelta
 
+from ..schemas import User
 from ..settings import JwtConfig
 from .exceptions import AuthErrorException
 
 
-def encode_jwt(user_id: int, settings: JwtConfig):
+def encode_jwt(user: User, settings: JwtConfig) -> Union[bytes, None]:
     expiration_time: int = settings.TOKEN_LIFETIME
     secret_key: str = settings.SECRET_KEY
 
@@ -18,7 +19,7 @@ def encode_jwt(user_id: int, settings: JwtConfig):
         payload: dict = {
             "exp": datetime.utcnow() + timedelta(seconds=expiration_time),
             "iat": datetime.utcnow(),
-            "sub": user_id
+            "sub": user.dict()
         }
 
         return jwt.encode(payload, secret_key, algorithm="HS256")
@@ -29,9 +30,9 @@ def encode_jwt(user_id: int, settings: JwtConfig):
 
 def decode_jwt(token: str, secret_key: str) -> Union[int, Response]:
     try:
-        return int(jwt.decode(token, secret_key)["sub"])
+        return jwt.decode(token, secret_key)["sub"]
     except jwt.ExpiredSignatureError:
-        raise AuthErrorException("Signature expired. Please log in again", 401)
+        raise AuthErrorException("Token expired. Please log in again", 401)
     except jwt.InvalidTokenError:
         raise AuthErrorException("Invalid token. Please log in again.", 401)
     except Exception:
