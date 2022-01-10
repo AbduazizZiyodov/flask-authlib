@@ -29,7 +29,7 @@ class BaseConfig:
 
     LOGIN_MESSAGE_CATEGORY = "info"
 
-    TABLENAME: str = "user"
+    TABLENAME: str = "users"
     MIN_PASSWORD_LENGTH: int = 8
 
     EMAIL_UNIQUE: bool = True
@@ -86,3 +86,5 @@ class JwtConfig:
 
     TOKEN_LIFETIME: int = 60*60  # seconds
     SECRET_KEY: str = secrets.token_hex()
+
+    alerts: Alerts = Alerts
