@@ -27,7 +27,7 @@ setup(
         "flask", "flask_login", "psycopg2-binary",
         "sqlalchemy", "flask_sqlalchemy", "flask_bcrypt",
         "cryptography==3.3.2", "python-jose", "jwt",
-        "pydantic", "email-validator", "gunicorn"
+        "pydantic", "email-validator", "gunicorn", "rich"
     ],
 
     classifiers=[

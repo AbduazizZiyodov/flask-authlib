@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import EmailStr
 from pydantic import BaseModel
 
@@ -14,7 +16,8 @@ class LoginData(BaseModel):
 
 
 class User(BaseModel):
-    id: int
+    id: Optional[int]
     username: str
     email: EmailStr
     password_hash: str
+    is_admin: bool
