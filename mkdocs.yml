@@ -85,6 +85,13 @@ nav:
           - Customize Base Settings: user-guide/base_config.md
           - Customize Alerts: user-guide/alerts_config.md
           - Customize Templates: user-guide/templates_config.md
+      - JWT Authentication:
+          - Intro to JWT: jwt-guide/intro_to_jwt.md
+          - Setup Basic JWT Authentication: jwt-guide/jwt-usage.md
+          - Advanced usage of JWT: jwt-guide/jwt-advanced-usage.md
+          - Customization of settings: jwt-guide/jwt-settings.md
+          - User model: jwt-guide/custom-user-model.md
+
   - Flask For Beginners:
       - flask_tutorials/getting_started.md
       - flask_tutorials/running_application.md
