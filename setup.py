@@ -24,10 +24,10 @@ setup(
     description='Authentication library for Flask Web Framework ',
 
     install_requires=[
-        "flask", "flask_login", "psycopg2-binary",
+        "flask", "flask_login",
         "sqlalchemy", "flask_sqlalchemy", "flask_bcrypt",
         "cryptography==3.3.2", "python-jose", "jwt",
-        "pydantic", "email-validator", "gunicorn", "rich"
+        "pydantic", "email-validator", "rich"
     ],
 
     classifiers=[
