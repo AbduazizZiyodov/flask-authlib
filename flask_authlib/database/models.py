@@ -21,4 +21,12 @@ def get_user_model(db: SQLAlchemy, table_name: str):
             db.session.add(self)
             db.session.commit()
 
+        def to_dict(self):
+            columns: list[str] = self.__table__.columns.keys()
+
+            return {
+                key: getattr(self, key)
+                for key in columns
+            }
+
     return User
