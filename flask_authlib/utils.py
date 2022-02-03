@@ -100,6 +100,7 @@ def set_flask_app_config(app: Flask, config: BaseConfig) -> None:
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         STATIC_FOLDER=config.STATIC_FOLDER_NAME
     )
+    return
 
 
 def get_create_admin_function(
@@ -127,19 +128,19 @@ def get_create_admin_function(
                 error_message.format("email"),
 
             )
-            return None, False
+            return
 
         if user_by_username:
             rich.print(
                 error_message.format("username"),
             )
-            return None, False
+            return
 
         if len(password) < min_password_length:
             rich.print(
                 f"[bold yellow] Password must be {min_password_length} characters long!",
             )
-            return None, False
+            return
 
         password_hash = generate_password_hash(password)
 
@@ -159,11 +160,12 @@ def get_create_admin_function(
     return create_admin_user
 
 
-def add_create_admin_command(app: Flask, function: Callable):
+def add_create_admin_command(app: Flask, function: Callable) -> None:
     @app.cli.command("create-admin")
     @click.argument("email")
     @click.argument("username")
     @click.argument("password")
     def create_admin(email: str, username: str, password: str):
-        function(email, username, password)
-        return
+        return function(email, username, password)
+
+    return
