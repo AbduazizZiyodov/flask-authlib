@@ -15,7 +15,7 @@
 
 # Installation
 
-Create virtual environment for your python project:
+Create a virtual environment for your python project:
 
 ```bash
 python -m venv env
@@ -23,7 +23,7 @@ python -m venv env
 
 !!! info "Virtual Environment"
 
-    The `venv` module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories.
+    The `venv` module provides support for creating lightweight “virtual environments” with their site directories, optionally isolated from system site directories.
 
     **Python docs** - [Creation of virtual environments](https://docs.python.org/3/library/venv.html)
 
