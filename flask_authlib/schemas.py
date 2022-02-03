@@ -20,4 +20,4 @@ class User(BaseModel):
     username: str
     email: EmailStr
     password_hash: str
-    is_admin: bool
+    is_admin: bool = False
