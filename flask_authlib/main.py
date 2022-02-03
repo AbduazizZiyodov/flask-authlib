@@ -1,8 +1,7 @@
-import click
-
 from os import path
 from shutil import rmtree
 
+from typing import Any
 from typing import List
 from typing import Optional
 from typing import NoReturn
@@ -28,7 +27,7 @@ from .settings import BaseConfig
 from .settings import TemplateConfig
 
 
-class Auth(object):
+class AuthManager:
     def __init__(
         self,
         app: Flask,
@@ -37,6 +36,7 @@ class Auth(object):
         base_config: Optional[BaseConfig] = BaseConfig,
         template_config: Optional[TemplateConfig] = TemplateConfig,
         auto_replace_folder: Optional[bool] = True,
+        UserModel: Optional[Any] = None
     ) -> None:
 
         self.app, self.db = app, db
@@ -47,14 +47,15 @@ class Auth(object):
         self.base_config = base_config
         self.template_config = template_config
 
-        self.User = get_user_model(self.db, self.base_config.TABLENAME)
+        self.User = get_user_model(
+            self.db, self.base_config.TABLENAME
+        ) if UserModel is None else UserModel
 
         self.blueprint_name = self.base_config.BLUEPRINT_NAME
 
         self.blueprint = Blueprint(
             self.blueprint_name, __name__
         )
-
         self.setup()
 
     def setup(self) -> NoReturn:
@@ -91,17 +92,17 @@ class Auth(object):
 
         self.blueprint.add_url_rule(
             rule=self.base_config.LOGIN_URL,
-            view_func=LoginView.as_view(self.base_config.login["name"])
+            view_func=LoginView.as_view("login_view")
         )
 
         self.blueprint.add_url_rule(
             rule=self.base_config.REGISTER_URL,
-            view_func=RegisterView.as_view(self.base_config.register["name"])
+            view_func=RegisterView.as_view("register_view")
         )
 
         self.blueprint.add_url_rule(
             rule=self.base_config.LOGOUT_URL,
-            view_func=LogoutView.as_view(self.base_config.logout["name"])
+            view_func=LogoutView.as_view("logout_view")
         )
 
         self.app.register_blueprint(self.blueprint)
@@ -137,4 +138,4 @@ class Auth(object):
         return path.abspath(__file__).replace("main.py", name)
 
     def get_login_view_name(self) -> str:
-        return self.blueprint_name + "." + self.base_config.login["name"]
+        return self.blueprint_name + "." + "login_view"
