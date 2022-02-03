@@ -9,7 +9,6 @@ from werkzeug.security import generate_password_hash
 
 from ..settings import JwtConfig
 
-from ..schemas import User
 from ..schemas import LoginData
 from ..schemas import RegisterData
 
@@ -85,13 +84,8 @@ class JWTLogin(BaseJwtView):
             )
 
         if check_password_hash(user.password_hash, data.password):
-            data = User(
-                id=user.id,
-                username=user.username,
-                email=user.email,
-                password_hash=user.password_hash,
-                is_admin=user.is_admin()
-            )
+            
+            data = self.settings.user_schema(**user.to_dict())
 
             return jsonify(
                 {
