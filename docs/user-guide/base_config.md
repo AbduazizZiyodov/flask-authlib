@@ -30,7 +30,7 @@ Basic Application:
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required
-from flask_authlib import Auth
+from flask_authlib import AuthManager
 
 app = Flask(__name__)
 app.config.update(
@@ -39,7 +39,7 @@ app.config.update(
 )
 db = SQLAlchemy(app)
 
-auth = Auth(app, db)
+auth = AuthManager(app, db)
 
 
 @app.route("/protected")
@@ -58,7 +58,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required
 
-from flask_authlib import Auth
+from flask_authlib import AuthManager
 from flask_authlib import BaseConfig
 
 app = Flask(__name__)
@@ -72,7 +72,7 @@ db = SQLAlchemy(app)
 class MySettings(BaseConfig):
     pass
 
-auth = Auth(app, db)
+auth = AuthManager(app, db)
 
 
 @app.route("/protected")
@@ -107,14 +107,14 @@ class MySettings(BaseConfig):
     LOGOUT_URL= "/auth/logout"
     MIN_PASSWORD_LENGTH=12
 
-auth = Auth(app, db,base_config=MySettings)
+auth = AuthManager(app, db,base_config=MySettings)
 ```
 
 - Navigate to `/login`:
 
 ![LOGIN_PAGE_404](../assets/screenshots/14.PNG)
 
-- Yeah, we changed login URL and we should navigate `/auth/login`:
+- Yeah, we changed the login URL, then we should navigate `/auth/login`:
 
 ![LOGIN_PAGE_404](../assets/screenshots/15.PNG)
 

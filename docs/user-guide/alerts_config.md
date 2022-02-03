@@ -1,6 +1,6 @@
-`flask_authlib.Alerts` - simple configuration that stores alert messages. It is pretty easy that customizing alert messages!
+`flask_authlib.Alerts` - a simple configuration that stores alert messages. It is pretty easy that customize alert messages!
 
-Alert object from source code of this library:
+An alert object from the source code of this library:
 
 ```python
 class Alerts:
@@ -11,7 +11,7 @@ class Alerts:
 
     LOGIN_FAIL: str = "The username or password is incorrect!"
 
-    REGISTER_FAIL: str = "This email and username are already taken!"
+    REGISTER_FAIL: str = "This email and username is already taken!"
 
     BAD_REQUEST: str = "Bad request!"
     REQUIRED_FIELD: str = "Please, fill in all required fields!"
@@ -24,7 +24,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required
 
-from flask_authlib import Auth
+from flask_authlib import AuthManager
 from flask_authlib import Alerts
 
 app = Flask(__name__)
@@ -40,7 +40,7 @@ class MyAlerts(Alerts):
     pass
 
 
-auth = Auth(app, db, alerts=MyAlerts)
+auth = AuthManager(app, db, alerts=MyAlerts)
 
 
 @app.route("/protected")
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     app.run()
 ```
 
-I want to change email and username alerts message:
+I want to change the email and username alerts messages:
 
 ```python hl_lines="2 3"
 class MyAlerts(Alerts):
@@ -68,7 +68,7 @@ Or, you can change `login_fail`'s alert message:
 
 ```python hl_lines="2"
 class MyAlerts(Alerts):
-    LOGIN_FAIL="Get your password from database and decode it!"
+    LOGIN_FAIL="Get your password from the database and decode it!"
 ```
 
 ![LOGIN_FAIL](../assets/screenshots/23.PNG)

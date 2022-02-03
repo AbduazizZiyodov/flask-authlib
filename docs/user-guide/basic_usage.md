@@ -1,17 +1,17 @@
-`Flask-Authlib` uses `SQLAlchemy`(sqlalchemy extension for flask) for the database part. After installation this ORM, you should import `Auth` and use it like this:
+`Flask-Authlib` uses `SQLAlchemy`(sqlalchemy extension for flask) for the database part. After installation this ORM, you should import `AuthManager` and use it like this:
 
 ```python hl_lines="3"
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_authlib import Auth
+from flask_authlib import AuthManager
 ```
 
-Define your `Flask application`, `db` and `Auth` base object:
+Define your `Flask application`, `db` and `AuthManager` base object:
 
-```python hl_lines="9"
+```python hl_lines="5 11"
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_authlib import Auth
+from flask_authlib import AuthManager
 
 app = Flask(__name__)
 app.config.update(
@@ -21,20 +21,20 @@ app.config.update(
 
 db = SQLAlchemy(app)
 
-auth = Auth(app,db)
+auth = AuthManager(app,db)
 ```
 
-!!! info "`flask_authlib.Auth`"
+!!! info "`flask_authlib.AuthManager`"
 
-    `Auth` takes two arguments(required): `app` (Flask App) and `db` (SQLAlchemy).
+    `AuthManager` takes two arguments(required): `app` (Flask App) and `db` (SQLAlchemy).
 
-Add simple route and protect it by flask login's `login_required` decorator for testing login functionality:
+Add a simple route and protect it by flask login's `login_required` decorator for testing login functionality:
 
 ```python hl_lines="16-17"
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required
-from flask_authlib import Auth
+from flask_authlib import AuthManager
 
 app = Flask(__name__)
 app.config.update(
@@ -43,7 +43,7 @@ app.config.update(
 )
 db = SQLAlchemy(app)
 
-auth = Auth(app, db)
+auth = AuthManager(app, db)
 
 
 @app.route("/protected")

@@ -39,7 +39,7 @@ class MyTemplateConfig(TemplateConfig):
 - Register Page:
   ![EMAIL_ALERT](../assets/screenshots/25.PNG)
 
-!!! info "Primary Color"
+!!! info "Primary colour"
 
     `Primary colour` sets the colour of the button and the title.
 
