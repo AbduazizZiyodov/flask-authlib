@@ -1,4 +1,5 @@
 import secrets
+from .schemas import User
 
 
 class BaseConfig:
@@ -6,19 +7,6 @@ class BaseConfig:
     LOGIN_URL: str = "/login"
     REGISTER_URL: str = "/register"
     LOGOUT_URL: str = "/logout"
-
-    logout: dict = {
-        "path": LOGOUT_URL,
-        "name": "logout_view"
-    }
-    login: dict = {
-        "path": LOGIN_URL,
-        "name": "login_view"
-    }
-    register: dict = {
-        "path": REGISTER_URL,
-        "name": "register_view"
-    }
 
     BLUEPRINT_NAME: str = "auth"
 
@@ -87,4 +75,8 @@ class JwtConfig:
     TOKEN_LIFETIME: int = 60*60  # seconds
     SECRET_KEY: str = secrets.token_hex()
 
+    USER_INFO_IN_JWT: bool = True
+
     alerts: Alerts = Alerts
+
+    user_schema: User = User
