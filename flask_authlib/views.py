@@ -11,7 +11,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_user
 from flask_login import logout_user
 
-from flask_bcrypt import Bcrypt
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 
 from .utils import validate_form_request
 from .utils import redirect_if_authenticated
@@ -23,9 +24,6 @@ from .settings import Alerts
 from .settings import COLORS
 from .settings import BaseConfig
 from .settings import TemplateConfig
-
-
-bcrypt = Bcrypt()
 
 
 class BaseView(MethodView):
@@ -93,7 +91,7 @@ class LoginView(BaseView):
             username=username
         ).first()
 
-        if user and bcrypt.check_password_hash(
+        if user and check_password_hash(
                 user.password_hash, password):
             login_user(user)
             flash("Welcome!", "success")
@@ -147,16 +145,13 @@ class RegisterView(BaseView):
         return self.add_new_user(**kwargs)
 
     def add_new_user(self, **kwargs):
-        hashed_password = bcrypt\
-            .generate_password_hash(
-                kwargs['password']
-            ).decode("utf-8")
+        kwargs['password_hash'] = generate_password_hash(
+            kwargs['password']
+        )
 
-        self.User(
-            email=kwargs["email"],
-            username=kwargs["username"],
-            password_hash=hashed_password
-        ).insert()
+        kwargs.pop("password")
+
+        self.User(**kwargs).insert()
 
         flash(self.alerts.REGISTER_SUCCESS, "success")
 
