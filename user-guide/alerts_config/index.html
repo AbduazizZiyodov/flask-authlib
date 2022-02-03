@@ -366,6 +366,109 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          JWT Authentication
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="JWT Authentication" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          JWT Authentication
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/intro_to_jwt/" class="md-nav__link">
+        Intro to JWT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-usage/" class="md-nav__link">
+        Setup Basic JWT Authentication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-advanced-usage/" class="md-nav__link">
+        Advanced usage of JWT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-settings/" class="md-nav__link">
+        Customization of settings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/custom-user-model/" class="md-nav__link">
+        User model
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -505,8 +608,8 @@
 
   <h1>Customize Alerts</h1>
 
-<p><code>flask_authlib.Alerts</code> - simple configuration that stores alert messages. It is pretty easy that customizing alert messages!</p>
-<p>Alert object from source code of this library:</p>
+<p><code>flask_authlib.Alerts</code> - a simple configuration that stores alert messages. It is pretty easy that customize alert messages!</p>
+<p>An alert object from the source code of this library:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -526,7 +629,7 @@
 
     <span class="n">LOGIN_FAIL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;The username or password is incorrect!&quot;</span>
 
-    <span class="n">REGISTER_FAIL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;This email and username are already taken!&quot;</span>
+    <span class="n">REGISTER_FAIL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;This email and username is already taken!&quot;</span>
 
     <span class="n">BAD_REQUEST</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Bad request!&quot;</span>
     <span class="n">REQUIRED_FIELD</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Please, fill in all required fields!&quot;</span>
@@ -567,7 +670,7 @@
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_required</span>
 
-<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">AuthManager</span>
 <span class="hll"><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Alerts</span>
 </span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -583,7 +686,7 @@
 </span><span class="hll">    <span class="k">pass</span>
 </span>
 
-<span class="hll"><span class="n">auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">alerts</span><span class="o">=</span><span class="n">MyAlerts</span><span class="p">)</span>
+<span class="hll"><span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">alerts</span><span class="o">=</span><span class="n">MyAlerts</span><span class="p">)</span>
 </span>
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/protected&quot;</span><span class="p">)</span>
@@ -596,7 +699,7 @@
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
-<p>I want to change email and username alerts message:</p>
+<p>I want to change the email and username alerts messages:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyAlerts</span><span class="p">(</span><span class="n">Alerts</span><span class="p">):</span>
@@ -609,7 +712,7 @@
 <p>Or, you can change <code>login_fail</code>'s alert message:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyAlerts</span><span class="p">(</span><span class="n">Alerts</span><span class="p">):</span>
-<span class="hll">    <span class="n">LOGIN_FAIL</span><span class="o">=</span><span class="s2">&quot;Get your password from database and decode it!&quot;</span>
+<span class="hll">    <span class="n">LOGIN_FAIL</span><span class="o">=</span><span class="s2">&quot;Get your password from the database and decode it!&quot;</span>
 </span></code></pre></div>
 </td></tr></table>
 <p><img alt="LOGIN_FAIL" src="../../assets/screenshots/23.PNG" /></p>

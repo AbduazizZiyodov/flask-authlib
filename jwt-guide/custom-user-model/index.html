@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/templates/">
+        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/jwt-guide/custom-user-model/">
       
       <link rel="icon" href="../../assets/favicon.ico">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
     
     
       
-        <title>Templates - Flask-Authlib</title>
+        <title>User model - Flask-Authlib</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#templates" class="md-skip">
+        <a href="#custom-user-model" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Templates
+              User model
             
           </span>
         </div>
@@ -248,12 +248,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -363,12 +365,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
       
       
       
@@ -391,7 +395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/intro_to_jwt/" class="md-nav__link">
+      <a href="../intro_to_jwt/" class="md-nav__link">
         Intro to JWT
       </a>
     </li>
@@ -405,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-usage/" class="md-nav__link">
+      <a href="../jwt-usage/" class="md-nav__link">
         Setup Basic JWT Authentication
       </a>
     </li>
@@ -419,7 +423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-advanced-usage/" class="md-nav__link">
+      <a href="../jwt-advanced-usage/" class="md-nav__link">
         Advanced usage of JWT
       </a>
     </li>
@@ -433,7 +437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-settings/" class="md-nav__link">
+      <a href="../jwt-settings/" class="md-nav__link">
         Customization of settings
       </a>
     </li>
@@ -445,11 +449,73 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../jwt-guide/custom-user-model/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          User model
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         User model
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#default-user-model" class="md-nav__link">
+    Default User Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-user-schemapydantic" class="md-nav__link">
+    Default User Schema(Pydantic)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-model" class="md-nav__link">
+    User Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-schema" class="md-nav__link">
+    User Schema
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -474,14 +540,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -504,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../../flask_tutorials/getting_started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -518,7 +582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../running_application/" class="md-nav__link">
+      <a href="../../flask_tutorials/running_application/" class="md-nav__link">
         Running Application
       </a>
     </li>
@@ -532,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../routing/" class="md-nav__link">
+      <a href="../../flask_tutorials/routing/" class="md-nav__link">
         Routing
       </a>
     </li>
@@ -546,7 +610,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http_methods/" class="md-nav__link">
+      <a href="../../flask_tutorials/http_methods/" class="md-nav__link">
         HTTP methods
       </a>
     </li>
@@ -558,21 +622,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../flask_tutorials/templates/" class="md-nav__link">
         Templates
       </a>
-      
     </li>
   
 
@@ -584,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../request_handling/" class="md-nav__link">
+      <a href="../../flask_tutorials/request_handling/" class="md-nav__link">
         Handling HTTP Requests
       </a>
     </li>
@@ -618,6 +672,42 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#default-user-model" class="md-nav__link">
+    Default User Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-user-schemapydantic" class="md-nav__link">
+    Default User Schema(Pydantic)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-model" class="md-nav__link">
+    User Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-schema" class="md-nav__link">
+    User Schema
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -629,61 +719,13 @@
               
                 
 
-<h1 id="templates">Templates</h1>
-<p><img alt="JINJA_LOGO" src="../../assets/jinja_logo.png" /></p>
-<p align='center'>
-    Jinja is a fast, expressive, extensible templating engine!
-</p>
-
-<div class="admonition success">
-<p class="admonition-title">Installation</p>
-<p>Jinja is already installed if you are installed flask 😀</p>
+<h1 id="custom-user-model"><strong>Custom User Model</strong></h1>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p><strong>Flask Authlib</strong> uses SQLAlchemy ORM on the database part. That means if you want to set your user model you should also use <code>SQLAlchemy</code>.</p>
 </div>
-<p>Flask uses the <code>Jinja</code> template engine for rendering <strong>HTML</strong> files. By defining your <code>Flask</code> application, it sets the default path of templates dir ( it is templates/` ).</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Import <code>render_template</code> function from <code>flask</code> on your code.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Create <code>templates/</code> directory and any <code>*.html</code> file.</li>
-</ul>
-<div class="admonition question">
-<p class="admonition-title">Rendering Templates</p>
-<p>Give your template's name as an argument to the <code>render_template</code> function.</p>
-</div>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
-</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">home_view</span><span class="p">():</span>
-<span class="hll">    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;home.html&quot;</span><span class="p">)</span>
-</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</code></pre></div>
-</td></tr></table>
-<table>
-<thead>
-<tr>
-<th align="center"><img alt="Result" src="../../assets/screenshots/6.PNG" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">It works 👀</td>
-</tr>
-</tbody>
-</table>
-<p>We can also pass variables from our python code to our templates.</p>
+<h3 id="default-user-model"><strong>Default User Model</strong></h3>
+<p>Code from <code>flask_authlib.database.models.User</code>:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -699,25 +741,79 @@
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">UserMixin</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="n">table_name</span>
+    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;extend_existing&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">password_hash</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">admin</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">is_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">admin</span>
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">home_view</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
-        <span class="s2">&quot;home.html&quot;</span><span class="p">,</span>
-<span class="hll">        <span class="n">directory</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">template_folder</span>
-</span>    <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">columns</span>
+        <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-<p>You should write(use) passed variable in your template between curly braces:</p>
+<h3 id="default-user-schemapydantic"><strong>Default User Schema(Pydantic)</strong></h3>
+<p>Code from <code>flask_authlib.schemas.User</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
+    <span class="n">password_hash</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">is_admin</span><span class="p">:</span> <span class="nb">bool</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="user-model"><strong>User Model</strong></h3>
+<p>For customization database model, you should get the default user model and create your user model class based on the default user model:</p>
+<p>Getting default user model:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">get_user_model</span> <span class="k">as</span> <span class="n">DefaultUserModel</span>
+</code></pre></div>
+</td></tr></table>
+<p>Create your user model. For example, I want to add the <code>is_baby</code> column on my user model:</p>
+<blockquote>
+<p>Make sure that you have created your flask app and database(DB). Don't forget about <code>SQLALCHEMY_DATABASE_URI</code>.</p>
+</blockquote>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">get_user_model</span> <span class="k">as</span> <span class="n">DefaultUserModel</span>
+
+<span class="hll"><span class="k">class</span> <span class="nc">CustomUser</span><span class="p">(</span><span class="n">DefaultUserModel</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s2">&quot;users&quot;</span><span class="p">)):</span>
+</span>    <span class="n">is_baby</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<blockquote>
+<p><code>db</code> and <code>table_name</code> arguments are required for <code>get_user_model</code></p>
+</blockquote>
+<p>Next, you have to apply this user model.</p>
+<p><strong>Code</strong></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -730,29 +826,144 @@
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;IE=edge&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>Hello World 👋<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span>
-<span class="hll">    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>TEMPLATES_DIR: {{ directory }}<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
-</span>  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">JWT</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">get_user_model</span> <span class="k">as</span> <span class="n">DefaultUserModel</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">CustomUser</span><span class="p">(</span><span class="n">DefaultUserModel</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s2">&quot;users&quot;</span><span class="p">)):</span>
+    <span class="n">is_baby</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///database.sqlite&quot;</span>
+
+<span class="hll"><span class="n">auth</span> <span class="o">=</span> <span class="n">JWT</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">UserModel</span><span class="o">=</span><span class="n">CustomUser</span><span class="p">)</span>
+</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_url_rule</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">view_func</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
-<div class="admonition info">
-<p class="admonition-title">Variables</p>
-<ul>
-<li><code>directory</code> - the name of our variable that we want to pass.</li>
-<li><code>app.template_folder</code> - flask app's default template dir.</li>
-</ul>
-</div>
-<p><img alt="Result" src="../../assets/screenshots/7.PNG" /></p>
+<h3 id="user-schema"><strong>User Schema</strong></h3>
+<p>If we use our modified model on this library, in the authentication process <code>pydantic</code> simply ignores new fields of our model. 
+But why ?! We have changed <code>user model</code>, not <code>user schema</code>. Pydantic serializes data according to its schemas. We changed the user model, and now we must change the user schema.</p>
+<p>Get default user schema:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">User</span>
+</code></pre></div>
+</td></tr></table>
+<p>Create your pydantic schema based on this <code>User</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="hll"><span class="k">class</span> <span class="nc">UserSchema</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+</span>    <span class="n">is_baby</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+</code></pre></div>
+</td></tr></table>
+<p>We have included our new field on this schema.
+Change default user schema from <code>JwtConfig</code>. For this, you should create your settings class.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">JwtConfig</span>
+
+<span class="hll"><span class="k">class</span> <span class="nc">MyConfig</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+</span>    <span class="n">user_schema</span><span class="p">:</span><span class="n">User</span> <span class="o">=</span> <span class="n">UserSchema</span>
+</code></pre></div>
+</td></tr></table>
+<p>Apply your settings:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">auth</span> <span class="o">=</span> <span class="n">JWT</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">,</span><span class="n">UserModel</span><span class="o">=</span><span class="n">CustomUser</span><span class="p">,</span><span class="n">settings</span><span class="o">=</span><span class="n">MyConfig</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>Run and test it!</p>
+<p><strong>Code</strong>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">JWT</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">JwtConfig</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">get_user_model</span> <span class="k">as</span> <span class="n">DefaultUserModel</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///database.sqlite&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">CustomUser</span><span class="p">(</span><span class="n">DefaultUserModel</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s2">&quot;users&quot;</span><span class="p">)):</span>
+    <span class="n">is_baby</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">UserSchema</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+    <span class="n">is_baby</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">MyConfig</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+    <span class="n">user_schema</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">UserSchema</span>
+
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">JWT</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">UserModel</span><span class="o">=</span><span class="n">CustomUser</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="n">MyConfig</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="nd">@auth</span><span class="o">.</span><span class="n">jwt_required</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">(</span><span class="n">user</span><span class="p">:</span><span class="n">UserSchema</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p><img alt="CUSTOM_USER" src="../../assets/screenshots/43.PNG" /></p>
+<p>👍</p>
 
               
             </article>
@@ -771,7 +982,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../http_methods/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HTTP methods" rel="prev">
+        <a href="../jwt-settings/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Customization of settings" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -780,20 +991,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              HTTP methods
+              Customization of settings
             </div>
           </div>
         </a>
       
       
         
-        <a href="../request_handling/" class="md-footer__link md-footer__link--next" aria-label="Next: Handling HTTP Requests" rel="next">
+        <a href="../../flask_tutorials/getting_started/" class="md-footer__link md-footer__link--next" aria-label="Next: Getting Started" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Handling HTTP Requests
+              Getting Started
             </div>
           </div>
           <div class="md-footer__button md-icon">

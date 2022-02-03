@@ -400,6 +400,109 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          JWT Authentication
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="JWT Authentication" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          JWT Authentication
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/intro_to_jwt/" class="md-nav__link">
+        Intro to JWT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-usage/" class="md-nav__link">
+        Setup Basic JWT Authentication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-advanced-usage/" class="md-nav__link">
+        Advanced usage of JWT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-settings/" class="md-nav__link">
+        Customization of settings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/custom-user-model/" class="md-nav__link">
+        User model
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -626,7 +729,7 @@
 <span class="normal">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_required</span>
-<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">AuthManager</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
@@ -635,7 +738,7 @@
 <span class="p">)</span>
 <span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
-<span class="n">auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
 
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/protected&quot;</span><span class="p">)</span>
@@ -679,7 +782,7 @@
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_required</span>
 
-<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">AuthManager</span>
 <span class="hll"><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">BaseConfig</span>
 </span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -693,7 +796,7 @@
 <span class="hll"><span class="k">class</span> <span class="nc">MySettings</span><span class="p">(</span><span class="n">BaseConfig</span><span class="p">):</span>
 </span><span class="hll">    <span class="k">pass</span>
 </span>
-<span class="n">auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
 
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/protected&quot;</span><span class="p">)</span>
@@ -734,7 +837,7 @@
     <span class="n">LOGOUT_URL</span><span class="o">=</span> <span class="s2">&quot;/auth/logout&quot;</span>
     <span class="n">MIN_PASSWORD_LENGTH</span><span class="o">=</span><span class="mi">12</span>
 
-<span class="hll"><span class="n">auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span><span class="n">base_config</span><span class="o">=</span><span class="n">MySettings</span><span class="p">)</span>
+<span class="hll"><span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span><span class="n">base_config</span><span class="o">=</span><span class="n">MySettings</span><span class="p">)</span>
 </span></code></pre></div>
 </td></tr></table>
 <ul>
@@ -742,7 +845,7 @@
 </ul>
 <p><img alt="LOGIN_PAGE_404" src="../../assets/screenshots/14.PNG" /></p>
 <ul>
-<li>Yeah, we changed login URL and we should navigate <code>/auth/login</code>:</li>
+<li>Yeah, we changed the login URL, then we should navigate <code>/auth/login</code>:</li>
 </ul>
 <p><img alt="LOGIN_PAGE_404" src="../../assets/screenshots/15.PNG" /></p>
 <ul>

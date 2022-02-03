@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/http_methods/">
+        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/jwt-guide/jwt-settings/">
       
       <link rel="icon" href="../../assets/favicon.ico">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
     
     
       
-        <title>HTTP methods - Flask-Authlib</title>
+        <title>Customization of settings - Flask-Authlib</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#http-methods" class="md-skip">
+        <a href="#jwt-modules-customization" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              HTTP methods
+              Customization of settings
             
           </span>
         </div>
@@ -248,12 +248,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -363,12 +365,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
       
       
       
@@ -391,7 +395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/intro_to_jwt/" class="md-nav__link">
+      <a href="../intro_to_jwt/" class="md-nav__link">
         Intro to JWT
       </a>
     </li>
@@ -405,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-usage/" class="md-nav__link">
+      <a href="../jwt-usage/" class="md-nav__link">
         Setup Basic JWT Authentication
       </a>
     </li>
@@ -419,7 +423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-advanced-usage/" class="md-nav__link">
+      <a href="../jwt-advanced-usage/" class="md-nav__link">
         Advanced usage of JWT
       </a>
     </li>
@@ -431,11 +435,101 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-settings/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Customization of settings
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Customization of settings
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-app-and-configuration" class="md-nav__link">
+    Basic app and configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#urls-customization" class="md-nav__link">
+    URLs customization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-tablename" class="md-nav__link">
+    Changing TABLENAME
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimum-password-length" class="md-nav__link">
+    Minimum password length
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-token-lifetime" class="md-nav__link">
+    Custom token lifetime
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-info" class="md-nav__link">
+    User Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alert-messages" class="md-nav__link">
+    Alert Messages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jwtconfigs-defaults" class="md-nav__link">
+    JwtConfig's Defaults
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -447,7 +541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/custom-user-model/" class="md-nav__link">
+      <a href="../custom-user-model/" class="md-nav__link">
         User model
       </a>
     </li>
@@ -474,14 +568,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -504,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../../flask_tutorials/getting_started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -518,7 +610,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../running_application/" class="md-nav__link">
+      <a href="../../flask_tutorials/running_application/" class="md-nav__link">
         Running Application
       </a>
     </li>
@@ -532,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../routing/" class="md-nav__link">
+      <a href="../../flask_tutorials/routing/" class="md-nav__link">
         Routing
       </a>
     </li>
@@ -544,21 +636,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../flask_tutorials/http_methods/" class="md-nav__link">
         HTTP methods
       </a>
-      
     </li>
   
 
@@ -570,7 +652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../templates/" class="md-nav__link">
+      <a href="../../flask_tutorials/templates/" class="md-nav__link">
         Templates
       </a>
     </li>
@@ -584,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../request_handling/" class="md-nav__link">
+      <a href="../../flask_tutorials/request_handling/" class="md-nav__link">
         Handling HTTP Requests
       </a>
     </li>
@@ -618,6 +700,70 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-app-and-configuration" class="md-nav__link">
+    Basic app and configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#urls-customization" class="md-nav__link">
+    URLs customization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-tablename" class="md-nav__link">
+    Changing TABLENAME
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimum-password-length" class="md-nav__link">
+    Minimum password length
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-token-lifetime" class="md-nav__link">
+    Custom token lifetime
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-info" class="md-nav__link">
+    User Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alert-messages" class="md-nav__link">
+    Alert Messages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jwtconfigs-defaults" class="md-nav__link">
+    JwtConfig's Defaults
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -629,27 +775,143 @@
               
                 
 
-<h1 id="http-methods">HTTP methods</h1>
-<p>We can set specific HTTP methods to our routes. Add methods to the list that you want and give this methods list as route decorator's arguments with methods key ( <code>methods = [ ...]</code> ). For example, you want to allow only the <strong>HTTP POST</strong> method on your specific route, then you should add <strong>POST</strong> on methods like this:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
-</span><span class="k">def</span> <span class="nf">home_view</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s2">&quot;Hello Bro 👋&quot;</span>
+<h1 id="jwt-modules-customization"><strong>JWT modules' customization</strong></h1>
+<p><code>flask_authlib.JWT</code> allows you to create your own settings object and use it. You should only create a class based on <code>flask_authlib.JwtConfig</code>, make your changes and it's ready for use.</p>
+<h3 id="basic-app-and-configuration"><strong>Basic app and configuration</strong></h3>
+<p>Create your flask app and import the <code>JwtConfig</code> object from <code>flask_authlib</code> for customization:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="hll"><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">AuthManager</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">JwtConfig</span>
+</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///database.sqlite&quot;</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">add_url_rule</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="n">view_func</span><span class="o">=</span><span class="k">lambda</span> <span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
-<table>
-<thead>
-<tr>
-<th align="center"><img alt="HTTP_POST" src="../../assets/screenshots/5.PNG" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">✅ Yeah, we sent a <strong>GET</strong> request from the browser, but it is not allowed.</td>
-</tr>
-</tbody>
-</table>
+<p>Define your settings class:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MySettings</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div>
+</td></tr></table>
+<p>Apply your settings:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">auth</span> <span class="o">=</span> <span class="n">JWT</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">,</span><span class="n">settings</span><span class="o">=</span><span class="n">MySettings</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="urls-customization"><strong>URLs customization</strong></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MySettings</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+    <span class="n">LOGIN_URL</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/api/login&quot;</span>
+    <span class="n">REGISTER_URL</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;api/register&quot;</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="changing-tablename"><strong>Changing <code>TABLENAME</code></strong></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MySettings</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+    <span class="n">TABLENAME</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;accounts&quot;</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="minimum-password-length"><strong>Minimum password length</strong></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MySettings</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+    <span class="n">MIN_PASSWORD_LENGTH</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="custom-token-lifetime"><strong>Custom token lifetime</strong></h3>
+<div class="admonition info">
+<p class="admonition-title">Token Lifetime</p>
+<p>All <strong>jwt</strong> tokens have an expiration time. This expiration time is set by the `server-side (in the encoding process). If a token has expired, users can't use it on <em>protected</em> routes.</p>
+</div>
+<p>In this library, you can set your token lifetime.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MySettings</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+    <span class="n">TOKEN_LIFETIME</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">30</span> <span class="c1"># seconds</span>
+</code></pre></div>
+</td></tr></table>
+<blockquote>
+<p>60x30 = 1800 seconds = 0.5 hour</p>
+</blockquote>
+<h3 id="user-info"><strong>User Info</strong></h3>
+<p>In the <code>Advanced usage of JWT</code> sections, I wrote that you can get user credentials by its <code>JWT</code> token easily. But, there are some cases that we should not do this. For example, if users changed their profile(username, email), the credentials do not match with data on the database.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MySettings</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+    <span class="n">USER_INFO_IN_JWT</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+</code></pre></div>
+</td></tr></table>
+<p>Now, we can get only <code>user_id</code> from <strong>jwt</strong> token ("sub") and our <code>jwt_requires</code> decorator(which allows you to get current user) fetch user from the database according to its <code>user_id</code>.</p>
+<blockquote>
+<p>If you set this param is <code>False</code>, you can still get <code>user</code> like a previous guide.</p>
+</blockquote>
+<h3 id="alert-messages"><strong>Alert Messages</strong></h3>
+<p>As you know, if the authentication process raises any exceptions, the server returns <code>401</code> response with a status code and error message. For changing this you should create another object for alerts.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Alerts</span>
+
+<span class="hll"><span class="k">class</span> <span class="nc">MyAlerts</span><span class="p">(</span><span class="n">Alerts</span><span class="p">):</span>
+</span>    <span class="n">LOGIN_FAIL</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span>
+
+<span class="k">class</span> <span class="nc">MySettings</span><span class="p">(</span><span class="n">JwtConfig</span><span class="p">):</span>
+<span class="hll">    <span class="n">alerts</span><span class="p">:</span><span class="n">Alert</span> <span class="o">=</span> <span class="n">MyAlerts</span>
+</span></code></pre></div>
+</td></tr></table>
+<h3 id="jwtconfigs-defaults"><strong>JwtConfig's Defaults</strong></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">JwtConfig</span><span class="p">:</span>
+    <span class="n">LOGIN_URL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/login&quot;</span>
+    <span class="n">REGISTER_URL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/register&quot;</span>
+
+    <span class="n">TABLENAME</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;users&quot;</span>
+    <span class="n">MIN_PASSWORD_LENGTH</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span>
+
+    <span class="n">TOKEN_LIFETIME</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">60</span>  <span class="c1"># seconds</span>
+    <span class="n">SECRET_KEY</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_hex</span><span class="p">()</span>
+
+    <span class="n">USER_INFO_IN_JWT</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">alerts</span><span class="p">:</span> <span class="n">Alerts</span> <span class="o">=</span> <span class="n">Alerts</span>
+
+    <span class="n">user_schema</span><span class="p">:</span><span class="n">User</span> <span class="o">=</span> <span class="n">User</span>
+</code></pre></div>
+</td></tr></table>
 
               
             </article>
@@ -668,7 +930,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../routing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Routing" rel="prev">
+        <a href="../jwt-advanced-usage/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Advanced usage of JWT" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -677,20 +939,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Routing
+              Advanced usage of JWT
             </div>
           </div>
         </a>
       
       
         
-        <a href="../templates/" class="md-footer__link md-footer__link--next" aria-label="Next: Templates" rel="next">
+        <a href="../custom-user-model/" class="md-footer__link md-footer__link--next" aria-label="Next: User model" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Templates
+              User model
             </div>
           </div>
           <div class="md-footer__button md-icon">

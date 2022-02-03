@@ -364,6 +364,109 @@
 
             
           
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          JWT Authentication
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="JWT Authentication" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          JWT Authentication
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/intro_to_jwt/" class="md-nav__link">
+        Intro to JWT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-usage/" class="md-nav__link">
+        Setup Basic JWT Authentication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-advanced-usage/" class="md-nav__link">
+        Advanced usage of JWT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/jwt-settings/" class="md-nav__link">
+        Customization of settings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jwt-guide/custom-user-model/" class="md-nav__link">
+        User model
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -503,15 +606,15 @@
 
   <h1>Basic Usage of Library</h1>
 
-<p><code>Flask-Authlib</code> uses <code>SQLAlchemy</code>(sqlalchemy extension for flask) for the database part. After installation this ORM, you should import <code>Auth</code> and use it like this:</p>
+<p><code>Flask-Authlib</code> uses <code>SQLAlchemy</code>(sqlalchemy extension for flask) for the database part. After installation this ORM, you should import <code>AuthManager</code> and use it like this:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">AuthManager</span>
 </span></code></pre></div>
 </td></tr></table>
-<p>Define your <code>Flask application</code>, <code>db</code> and <code>Auth</code> base object:</p>
+<p>Define your <code>Flask application</code>, <code>db</code> and <code>AuthManager</code> base object:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -526,24 +629,24 @@
 <span class="normal">12</span>
 <span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
-<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">AuthManager</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+<span class="hll"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
     <span class="n">DEBUG</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">SQLALCHEMY_DATABASE_URI</span><span class="o">=</span><span class="s2">&quot;sqlite:///database.db&quot;</span>
-<span class="hll"><span class="p">)</span>
-</span>
-<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="p">)</span>
 
-<span class="n">auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">)</span>
+<span class="hll"><span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 <div class="admonition info">
-<p class="admonition-title"><code>flask_authlib.Auth</code></p>
-<p><code>Auth</code> takes two arguments(required): <code>app</code> (Flask App) and <code>db</code> (SQLAlchemy).</p>
+<p class="admonition-title"><code>flask_authlib.AuthManager</code></p>
+<p><code>AuthManager</code> takes two arguments(required): <code>app</code> (Flask App) and <code>db</code> (SQLAlchemy).</p>
 </div>
-<p>Add simple route and protect it by flask login's <code>login_required</code> decorator for testing login functionality:</p>
+<p>Add a simple route and protect it by flask login's <code>login_required</code> decorator for testing login functionality:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -568,7 +671,7 @@
 <span class="normal">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_required</span>
-<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">Auth</span>
+<span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">AuthManager</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
@@ -577,7 +680,7 @@
 <span class="p">)</span>
 <span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
-<span class="n">auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
 
 
 <span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/protected&quot;</span><span class="p">)</span>

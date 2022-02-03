@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/http_methods/">
+        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/jwt-guide/intro_to_jwt/">
       
       <link rel="icon" href="../../assets/favicon.ico">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
     
     
       
-        <title>HTTP methods - Flask-Authlib</title>
+        <title>Intro to JWT - Flask-Authlib</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#http-methods" class="md-skip">
+        <a href="#jwt" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              HTTP methods
+              Intro to JWT
             
           </span>
         </div>
@@ -248,12 +248,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -363,12 +365,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
       
       
       
@@ -389,11 +393,69 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../jwt-guide/intro_to_jwt/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Intro to JWT
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Intro to JWT
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jwt" class="md-nav__link">
+    💡 JWT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-json-web-token-structure" class="md-nav__link">
+    🤔 What is the JSON Web Token structure?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-json-web-tokens-work" class="md-nav__link">
+    ✨ How do JSON Web Tokens work?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    ✅ Permissions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -405,7 +467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-usage/" class="md-nav__link">
+      <a href="../jwt-usage/" class="md-nav__link">
         Setup Basic JWT Authentication
       </a>
     </li>
@@ -419,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-advanced-usage/" class="md-nav__link">
+      <a href="../jwt-advanced-usage/" class="md-nav__link">
         Advanced usage of JWT
       </a>
     </li>
@@ -433,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-settings/" class="md-nav__link">
+      <a href="../jwt-settings/" class="md-nav__link">
         Customization of settings
       </a>
     </li>
@@ -447,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/custom-user-model/" class="md-nav__link">
+      <a href="../custom-user-model/" class="md-nav__link">
         User model
       </a>
     </li>
@@ -474,14 +536,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -504,7 +564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../../flask_tutorials/getting_started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -518,7 +578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../running_application/" class="md-nav__link">
+      <a href="../../flask_tutorials/running_application/" class="md-nav__link">
         Running Application
       </a>
     </li>
@@ -532,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../routing/" class="md-nav__link">
+      <a href="../../flask_tutorials/routing/" class="md-nav__link">
         Routing
       </a>
     </li>
@@ -544,21 +604,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../flask_tutorials/http_methods/" class="md-nav__link">
         HTTP methods
       </a>
-      
     </li>
   
 
@@ -570,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../templates/" class="md-nav__link">
+      <a href="../../flask_tutorials/templates/" class="md-nav__link">
         Templates
       </a>
     </li>
@@ -584,7 +634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../request_handling/" class="md-nav__link">
+      <a href="../../flask_tutorials/request_handling/" class="md-nav__link">
         Handling HTTP Requests
       </a>
     </li>
@@ -615,8 +665,42 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jwt" class="md-nav__link">
+    💡 JWT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-json-web-token-structure" class="md-nav__link">
+    🤔 What is the JSON Web Token structure?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-json-web-tokens-work" class="md-nav__link">
+    ✨ How do JSON Web Tokens work?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    ✅ Permissions
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -629,27 +713,102 @@
               
                 
 
-<h1 id="http-methods">HTTP methods</h1>
-<p>We can set specific HTTP methods to our routes. Add methods to the list that you want and give this methods list as route decorator's arguments with methods key ( <code>methods = [ ...]</code> ). For example, you want to allow only the <strong>HTTP POST</strong> method on your specific route, then you should add <strong>POST</strong> on methods like this:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
-</span><span class="k">def</span> <span class="nf">home_view</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s2">&quot;Hello Bro 👋&quot;</span>
+  <h1>Intro to JWT</h1>
+
+<blockquote>
+<p><img alt="JWT LOGO" src="../../assets/jwt_logo.jpeg" /></p>
+</blockquote>
+<h3 id="jwt"><strong>💡 JWT</strong></h3>
+<p>JSON Web Token (<strong>JWT</strong>) is an open standard (<code>RFC 7519</code>) that defines a compact and self-contained way for securely transmitting information between parties as a <code>JSON</code> object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret (with the <code>HMAC</code> algorithm) or a public/private key pair using RSA or ECDSA.</p>
+<p>Although <strong>JWTs</strong> can be encrypted to also provide secrecy between parties, we will focus on signed tokens. Signed tokens can verify the integrity of the claims contained within them, while encrypted tokens hide those claims from other parties. When tokens are signed using `public/private key pairs, the signature also certifies that only the party holding the private key is the one that signed it.</p>
+<blockquote>
+<p><a href="https://jwt.io/introduction">Reference</a></p>
+</blockquote>
+<h3 id="what-is-the-json-web-token-structure"><strong>🤔 What is the JSON Web Token structure?</strong></h3>
+<p>In its compact form, JSON Web Tokens consist of three parts separated by dots (.), which are:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Header</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Payload</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Signature</li>
+</ul>
+<p>Therefore, a <strong>JWT</strong> typically looks like the following:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>xxxxx.yyyyy.zzzzz
 </code></pre></div>
 </td></tr></table>
-<table>
-<thead>
-<tr>
-<th align="center"><img alt="HTTP_POST" src="../../assets/screenshots/5.PNG" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">✅ Yeah, we sent a <strong>GET</strong> request from the browser, but it is not allowed.</td>
-</tr>
-</tbody>
-</table>
+<blockquote>
+<p>Joke: If you see that token starts with <code>ey</code>, you can say that it is a <strong>JWT</strong> token 😂</p>
+</blockquote>
+<h3 id="how-do-json-web-tokens-work"><strong>✨ How do JSON Web Tokens work?</strong></h3>
+<blockquote>
+<p>A very common use for JWT — and perhaps the only good one — is as an API authentication mechanism.</p>
+</blockquote>
+<p>Whenever the user wants to access a protected route or resource, the user agent should send the JWT, typically in the Authorization header using the Bearer schema. The content of the header should look like the following:</p>
+<blockquote>
+<p><img alt="AUTH HEADER" src="../../assets/screenshots/auth-header.png" /></p>
+</blockquote>
+<p>By using python's <code>requests</code> library:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">jwt_token</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ey...&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://my-host.com/api/login&quot;</span>
+<span class="n">request_body</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="p">:</span><span class="s2">&quot;Abduaziz&quot;</span><span class="p">}</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">jwt_token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span>
+    <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">request_body</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>When we send this request, the server:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Tries to get <code>Authorization</code> from <code>HTTP</code> header.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Decodes and checks the validity of this token.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> If there are errors with the token the server returns the <code>HTTP 401</code> response to the client.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> JWT tokens have an expiration time. If the token has expired, users can't use it. If not, the server returns a successful response.</li>
+</ul>
+<h3 id="permissions"><strong>✅ Permissions</strong></h3>
+<blockquote>
+<p><img alt="PERMISSIONS" src="../../assets/permissions.png" /></p>
+</blockquote>
+<p>We can place user <code>role</code> &amp; <code>permissions</code> (admin, user ...) on the JWT token. You can't access to <code>admin</code> resource when you send a valid JWT token that has <code>user</code> permission, not <code>admin</code>.</p>
+<p>Adding permissions to JWT can be done on the token <code>encoding</code> process. You should add permissions on the JWT token's payload. After that, by decoding this token you can get this payload.</p>
+<p>Example</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234567890&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;admin&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table>
+<div class="admonition info">
+<p class="admonition-title">Libraries</p>
+<p>Reference to the libraries that help you work with <strong>JWT</strong>: <a href="https://jwt.io/libraries">https://jwt.io/libraries</a></p>
+</div>
 
               
             </article>
@@ -668,7 +827,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../routing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Routing" rel="prev">
+        <a href="../../user-guide/templates_config/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Customize Templates" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -677,20 +836,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Routing
+              Customize Templates
             </div>
           </div>
         </a>
       
       
         
-        <a href="../templates/" class="md-footer__link md-footer__link--next" aria-label="Next: Templates" rel="next">
+        <a href="../jwt-usage/" class="md-footer__link md-footer__link--next" aria-label="Next: Setup Basic JWT Authentication" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Templates
+              Setup Basic JWT Authentication
             </div>
           </div>
           <div class="md-footer__button md-icon">

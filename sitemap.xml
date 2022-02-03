@@ -36,6 +36,31 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>http://abduazizziyodov.github.io/flask_authlib/jwt-guide/custom-user-model/</loc>
+         <lastmod>2022-02-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://abduazizziyodov.github.io/flask_authlib/jwt-guide/intro_to_jwt/</loc>
+         <lastmod>2022-02-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://abduazizziyodov.github.io/flask_authlib/jwt-guide/jwt-advanced-usage/</loc>
+         <lastmod>2022-02-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://abduazizziyodov.github.io/flask_authlib/jwt-guide/jwt-settings/</loc>
+         <lastmod>2022-02-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://abduazizziyodov.github.io/flask_authlib/jwt-guide/jwt-usage/</loc>
+         <lastmod>2022-02-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>http://abduazizziyodov.github.io/flask_authlib/user-guide/alerts_config/</loc>
          <lastmod>2022-02-03</lastmod>
          <changefreq>daily</changefreq>

@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/flask_tutorials/http_methods/">
+        <link rel="canonical" href="http://abduazizziyodov.github.io/flask_authlib/jwt-guide/jwt-usage/">
       
       <link rel="icon" href="../../assets/favicon.ico">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
     
     
       
-        <title>HTTP methods - Flask-Authlib</title>
+        <title>Setup Basic JWT Authentication - Flask-Authlib</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#http-methods" class="md-skip">
+        <a href="#setup-basic-jwt-authentication" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              HTTP methods
+              Setup Basic JWT Authentication
             
           </span>
         </div>
@@ -248,12 +248,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -363,12 +365,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
       
       
       
@@ -391,7 +395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/intro_to_jwt/" class="md-nav__link">
+      <a href="../intro_to_jwt/" class="md-nav__link">
         Intro to JWT
       </a>
     </li>
@@ -403,11 +407,73 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-usage/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Setup Basic JWT Authentication
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Setup Basic JWT Authentication
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-application" class="md-nav__link">
+    🧨 Basic application
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registration" class="md-nav__link">
+    🔐 Registration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login" class="md-nav__link">
+    🔓 Login
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decoding" class="md-nav__link">
+    🧮 Decoding
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -419,7 +485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-advanced-usage/" class="md-nav__link">
+      <a href="../jwt-advanced-usage/" class="md-nav__link">
         Advanced usage of JWT
       </a>
     </li>
@@ -433,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/jwt-settings/" class="md-nav__link">
+      <a href="../jwt-settings/" class="md-nav__link">
         Customization of settings
       </a>
     </li>
@@ -447,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../jwt-guide/custom-user-model/" class="md-nav__link">
+      <a href="../custom-user-model/" class="md-nav__link">
         User model
       </a>
     </li>
@@ -474,14 +540,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -504,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../../flask_tutorials/getting_started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -518,7 +582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../running_application/" class="md-nav__link">
+      <a href="../../flask_tutorials/running_application/" class="md-nav__link">
         Running Application
       </a>
     </li>
@@ -532,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../routing/" class="md-nav__link">
+      <a href="../../flask_tutorials/routing/" class="md-nav__link">
         Routing
       </a>
     </li>
@@ -544,21 +608,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../flask_tutorials/http_methods/" class="md-nav__link">
         HTTP methods
       </a>
-      
     </li>
   
 
@@ -570,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../templates/" class="md-nav__link">
+      <a href="../../flask_tutorials/templates/" class="md-nav__link">
         Templates
       </a>
     </li>
@@ -584,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../request_handling/" class="md-nav__link">
+      <a href="../../flask_tutorials/request_handling/" class="md-nav__link">
         Handling HTTP Requests
       </a>
     </li>
@@ -618,6 +672,42 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-application" class="md-nav__link">
+    🧨 Basic application
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registration" class="md-nav__link">
+    🔐 Registration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login" class="md-nav__link">
+    🔓 Login
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decoding" class="md-nav__link">
+    🧮 Decoding
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -629,27 +719,204 @@
               
                 
 
-<h1 id="http-methods">HTTP methods</h1>
-<p>We can set specific HTTP methods to our routes. Add methods to the list that you want and give this methods list as route decorator's arguments with methods key ( <code>methods = [ ...]</code> ). For example, you want to allow only the <strong>HTTP POST</strong> method on your specific route, then you should add <strong>POST</strong> on methods like this:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
-</span><span class="k">def</span> <span class="nf">home_view</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s2">&quot;Hello Bro 👋&quot;</span>
+<h1 id="setup-basic-jwt-authentication"><strong>Setup Basic JWT Authentication</strong></h1>
+<h3 id="basic-application"><strong>🧨 Basic application</strong></h3>
+<p>Using JWT authentication on this library is very easy! Just one import &amp; definition! For testing it, create a basic flask application with a database (SQLAlchemy is recommended).</p>
+<p>We also created one basic route that returns a simple JSON response.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="hll"><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///database.sqlite&quot;</span>
+</span>
+
+<span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+</span><span class="hll">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;It should be protected!&quot;</span><span class="p">}</span>
+</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># just run this python code and it will be executed</span>
 </code></pre></div>
 </td></tr></table>
-<table>
-<thead>
-<tr>
-<th align="center"><img alt="HTTP_POST" src="../../assets/screenshots/5.PNG" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">✅ Yeah, we sent a <strong>GET</strong> request from the browser, but it is not allowed.</td>
-</tr>
-</tbody>
-</table>
+<p>Our task is to protect this route by using JWT tokens. For doing this import <code>JWT</code> main class from our <code>flask_authlib</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">JWT</span>
+</code></pre></div>
+</td></tr></table>
+<p>Initialize it bypassing your flask app and sqlalchemy <code>db</code> as <code>JWT</code>'s arguments:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_authlib</span> <span class="kn">import</span> <span class="n">JWT</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">JWT</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you look at your routes, you will see new API endpoints on your application. They were added by <code>flask_authlib</code>'s JWT submodule.</p>
+<p>For getting a list of routes, I recommended using the flask's CLI.</p>
+<p><img alt="FLASK_CLI" src="../../assets/screenshots/26.PNG" /></p>
+<p>Yeah, you could do it by python code (using <code>flask. Flask</code>'s <code>url_map</code>). But, I think it is a very simple &amp; good approach for this task.</p>
+</div>
+<p>In this library, <code>pydantic</code> is used for the data part (for validating, serializing). Every field of the user's request
+the body will be checked &amp; validated!</p>
+<p><strong>✨ Run your development server:</strong></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ python server.py
+</code></pre></div>
+</td></tr></table>
+<p>or</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>$ flask run
+</code></pre></div>
+</td></tr></table>
+<p><strong>Code:</strong></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///database.sqlite&quot;</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">JWT</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;It should be protected!&quot;</span><span class="p">}</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<div class="admonition success">
+<p class="admonition-title">Testing</p>
+<p>For testing JWT functionality you can any HTTP clients or python's testing frameworks (unittest, pytest ...). But on this tutorial, I prefer to use <a href="https://www.postman.com/">postman</a> (useful API development tool).</p>
+</div>
+<h3 id="registration"><strong>🔐 Registration</strong></h3>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Basic request:
+      <img alt="BASIC_REQUEST" src="../../assets/screenshots/27.PNG" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Send empty request body:
+      <img alt="EMPTY_REQUEST" src="../../assets/screenshots/28.PNG" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Checking email validation:
+      <img alt="VALID_REQUEST" src="../../assets/screenshots/29.PNG" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Successful registration:</p>
+</li>
+</ul>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="n">email</span><span class="p">:</span><span class="nb">str</span> <span class="c1"># EmailStr on pydantic</span>
+    <span class="n">password</span><span class="p">:</span><span class="nb">str</span>
+    <span class="n">username</span><span class="p">:</span><span class="nb">str</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p><img alt="VALID_REQUEST" src="../../assets/screenshots/30.PNG" /></p>
+<h3 id="login"><strong>🔓 Login</strong></h3>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Send empty request body:
+      <img alt="EMPTY_REQUEST" src="../../assets/screenshots/31.PNG" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Checking email validation:
+      <img alt="VALID_REQUEST" src="../../assets/screenshots/32.PNG" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Successful registration:</p>
+</li>
+</ul>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="n">password</span><span class="p">:</span><span class="nb">str</span>
+    <span class="n">username</span><span class="p">:</span><span class="nb">str</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p><img alt="VALID_REQUEST" src="../../assets/screenshots/33.PNG" /></p>
+<p>🚀 We have got JWT access token!</p>
+<h3 id="decoding"><strong>🧮 Decoding</strong></h3>
+<p>You can decode this <code>access_token</code> on <a href="http://jwt.io">jwt.io</a></p>
+<p><img alt="JWT_IO" src="../../assets/screenshots/34.PNG" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> After the decoding process, you can easily get the user's credentials without querying to your database!</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">CORS</p>
+<p>I recommend to you use <code>Flask-Cors</code> before making API requests to your flask server from the frontend(angular,vue, react ...).</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install -U flask-cors
+</code></pre></div>
+</td></tr></table>
+<p>Basic usage:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">flask_cors</span> <span class="kn">import</span> <span class="n">CORS</span>
+</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="hll"><span class="n">CORS</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">root</span><span class="p">():</span>
+  <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<blockquote>
+<p>P.S You can also use CORS on your <code>blueprints</code></p>
+</blockquote>
+<p><a href="https://flask-cors.readthedocs.io/en/latest/index.html">Documentation</a></p>
+</div>
 
               
             </article>
@@ -668,7 +935,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../routing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Routing" rel="prev">
+        <a href="../intro_to_jwt/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Intro to JWT" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -677,20 +944,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Routing
+              Intro to JWT
             </div>
           </div>
         </a>
       
       
         
-        <a href="../templates/" class="md-footer__link md-footer__link--next" aria-label="Next: Templates" rel="next">
+        <a href="../jwt-advanced-usage/" class="md-footer__link md-footer__link--next" aria-label="Next: Advanced usage of JWT" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Templates
+              Advanced usage of JWT
             </div>
           </div>
           <div class="md-footer__button md-icon">
