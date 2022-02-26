@@ -1,7 +1,5 @@
-from typing import Any
-from typing import Callable
-from typing import Optional
-
+import typing as t
+from functools import wraps
 from inspect import signature
 
 from flask import Flask
@@ -24,6 +22,9 @@ from ..utils import get_create_admin_function
 from .exceptions import AuthErrorException
 from .exceptions import auth_error_handler
 
+from .guards import Guard
+
+
 
 class JWT:
     def __init__(
@@ -31,7 +32,7 @@ class JWT:
         app: Flask,
         db: SQLAlchemy,
         settings: JwtConfig = JwtConfig,
-        UserModel: Optional[Any] = None
+        UserModel: t.Optional[t.Any] = None
     ) -> None:
         """
         Main `JWT` object which allows you to
@@ -75,40 +76,76 @@ class JWT:
             view_func=JWTLogin.as_view("jwt_login")
         )
 
-    def jwt_required(self, func: Callable) -> None:
-        """
-        Decorator for protecting API endpoints with JWT tokens.
-        """
-        def decorator(*args, **kwargs) -> Callable:
-            authorization: str = request.headers.get("Authorization")
+    def check_authorization(self) -> t.Optional[t.Union[bool, str]]:
+        authorization: str = request.headers.get("Authorization")
 
-            if not authorization:
-                raise AuthErrorException(
-                    "Authorization(JWT token) not in the header"
+        if not authorization:
+            raise AuthErrorException(
+                "Authorization(JWT token) not in the header"
+            )
+
+        jwt_token: str = authorization.split(" ")
+
+        if jwt_token[0].lower() != "bearer" or len(jwt_token) != 2:
+            raise AuthErrorException(
+                "Check your authorization header."
+            )
+        jwt_token: str = jwt_token[1]
+
+        return True, jwt_token
+
+    def get_user_data(self, jwt_token: str) -> t.Any:
+
+        user_data = decode_jwt(jwt_token, self.settings.SECRET_KEY)
+
+        return self.load_user(user_data)
+
+    def load_user(self, user_data: t.Any) -> t.Any:
+        if self.settings.USER_INFO_IN_JWT and\
+                isinstance(user_data, dict):
+
+            user = self.settings.user_schema(**user_data)
+        else:
+            user_query = self.User.query.get(
+                int(user_data)
+            ).to_dict()
+
+            user = self.settings.user_schema(
+                user_query.to_dict()
+            )
+
+        return user
+
+    def set_user(self, jwt_token: str, function: t.Callable, *args, **kwargs) -> t.Union[tuple, dict]:
+        user_data = self.get_user_data(jwt_token)
+
+        if signature(function).parameters.get("user") is not None:
+            kwargs["user"] = user_data
+
+        return args, kwargs, user_data
+
+    def can_activate(self, RouteGuard: Guard, user_data: t.Any) -> None:
+        if not RouteGuard().can_activate(user_data):
+            raise AuthErrorException(
+                "You do not have permission!", 403
+            )
+
+    def jwt_required(self, RouteGuard: t.Optional[Guard]) -> t.Callable:
+        """
+        Decorator for protecting API endpoints with JWT tokens and Guards.
+        """
+        def decorator(function: t.Callable):
+            @wraps(function)
+            def wrapper(*args, **kwargs) -> t.Callable:
+                _, jwt_token = self.check_authorization()
+
+                args, kwargs, user_data = self.set_user(
+                    jwt_token, function, *args, **kwargs
                 )
 
-            jwt_token: str = authorization.split(" ")
+                self.can_activate(
+                    RouteGuard, user_data) if RouteGuard else None
 
-            if jwt_token[0].lower() != "bearer" or len(jwt_token) != 2:
-                raise AuthErrorException(
-                    "Check your authorization header!!!"
-                )
-
-            jwt_token: str = jwt_token[1]
-            user_data = decode_jwt(jwt_token, self.settings.SECRET_KEY)
-
-            if signature(func).parameters.get("user") is not None:
-                if self.settings.USER_INFO_IN_JWT:
-                    kwargs["user"] = self.settings.user_schema(**user_data)
-                else:
-                    user = self.User.filter_by(
-                        id=int(user_data)
-                    ).first()
-
-                    kwargs["user"] = self.settings.user_schema(
-                        **user.to_dict()
-                    )
-
-            return func(*args, **kwargs)
-
+                return function(*args, **kwargs)
+            return wrapper
         return decorator
