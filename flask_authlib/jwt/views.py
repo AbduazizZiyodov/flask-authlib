@@ -40,33 +40,21 @@ class JWTRegister(BaseJwtView):
             raise AuthErrorException(self.settings.alerts.EMAIL_ALERT, 400)
 
         if user_by_username:
-            raise AuthErrorException(self.settings.alerts.EMAIL_ALERT, 400)
+            raise AuthErrorException(self.settings.alerts.USERNAME_ALERT, 400)
 
-        min_password_length: str = self.settings.MIN_PASSWORD_LENGTH
-
-        if len(data.password) < min_password_length:
+        if len(data.password) < (min_password_length := self.settings.MIN_PASSWORD_LENGTH):
             raise AuthErrorException(
                 self.settings.alerts.PASSWORD_LENGTH.format(
                     min_password_length
                 ),
                 400
             )
-
-        password_hash = generate_password_hash(data.password)
-
-        user = self.User(
-            email=data.email,
-            username=data.username,
-            password_hash=password_hash
-        )
-
-        user.insert()
+        data.password = generate_password_hash(data.password)
+        self.User(**data.dict()).insert()
 
         return jsonify(
-            {
-                "success": True,
-                "message": self.settings.alerts.REGISTER_SUCCESS
-            }
+            success=True,
+            message=self.settings.alerts.REGISTER_SUCCESS
         ), 200
 
 
@@ -78,24 +66,15 @@ class JWTLogin(BaseJwtView):
         ).first()
 
         if user is None:
-
             raise AuthErrorException(
                 self.settings.alerts.LOGIN_FAIL
             )
 
-        if check_password_hash(user.password_hash, data.password):
-            
+        if check_password_hash(user.password, data.password):
             data = self.settings.user_schema(**user.to_dict())
+            return jsonify(access_token=encode_jwt(data, self.settings)), 200
 
-            return jsonify(
-                {
-                    "access_token": encode_jwt(data, self.settings)
-                }
-            ), 200
-
-        raise AuthErrorException(
-            self.settings.alerts.LOGIN_FAIL
-        )
+        raise AuthErrorException(self.settings.alerts.LOGIN_FAIL)
 
 
 __all__ = ["BaseJwtView", "JWTRegister", "JWTLogin"]

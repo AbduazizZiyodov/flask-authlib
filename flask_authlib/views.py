@@ -84,15 +84,14 @@ class LoginView(BaseView):
             flash(self.alerts.BAD_REQUEST, "danger")
             return redirect(self.LOGIN_URL)
 
-        username, password =\
-            request.form["username"], request.form["password"]
+        username, password = request.form["username"], request.form["password"]
 
         user = self.User.query.filter_by(
             username=username
         ).first()
 
         if user and check_password_hash(
-                user.password_hash, password):
+                user.password, password):
             login_user(user)
             flash("Welcome!", "success")
             return redirect(self.HOME_URL)
@@ -145,7 +144,7 @@ class RegisterView(BaseView):
         return self.add_new_user(**kwargs)
 
     def add_new_user(self, **kwargs):
-        kwargs['password_hash'] = generate_password_hash(
+        kwargs['password'] = generate_password_hash(
             kwargs['password']
         )
 

@@ -19,5 +19,5 @@ class User(BaseModel):
     id: Optional[int]
     username: str
     email: EmailStr
-    password_hash: str
-    is_admin: bool = False
+    password: str
+    is_admin: bool

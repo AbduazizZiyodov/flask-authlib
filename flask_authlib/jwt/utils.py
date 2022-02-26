@@ -27,7 +27,7 @@ def encode_jwt(user: User, settings: JwtConfig) -> Union[bytes, None]:
         raise AuthErrorException("An error occurred!", 500)
 
 
-def decode_jwt(token: str, secret_key: str) -> int:
+def decode_jwt(token: str, secret_key: str) -> Union[int, User]:
     try:
         return jwt.decode(token, secret_key, algorithms=["HS256"])["sub"]
     except jwt.ExpiredSignatureError:
