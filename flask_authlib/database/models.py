@@ -9,13 +9,10 @@ def get_user_model(db: SQLAlchemy, table_name: str):
         __table_args__ = {'extend_existing': True}
 
         id = db.Column(db.Integer, primary_key=True)
-        username = db.Column(db.String, nullable=False)
         email = db.Column(db.String, nullable=False)
-        password_hash = db.Column(db.String, nullable=False)
-        admin = db.Column(db.Boolean, default=False)
-
-        def is_admin(self) -> bool:
-            return self.admin
+        username = db.Column(db.String, nullable=False)
+        password = db.Column(db.String, nullable=False)
+        is_admin = db.Column(db.Boolean, default=False)
 
         def insert(self) -> None:
             db.session.add(self)
