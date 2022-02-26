@@ -9,10 +9,8 @@ class AuthErrorException(Exception):
         self.status = status
 
 
-def auth_error_handler(exception: AuthErrorException):
+def auth_error_handler(exc: AuthErrorException):
     return jsonify(
-        {
-            "success": False,
-            "message": exception.message
-        }
-    ), exception.status
+        success=False,
+        message=exc.message
+    ), exc.status
