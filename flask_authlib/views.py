@@ -91,7 +91,7 @@ class LoginView(BaseView):
         ).first()
 
         if user and check_password_hash(
-                user.password, password):
+                user.password_hash, password):
             login_user(user)
             flash("Welcome!", "success")
             return redirect(self.HOME_URL)
@@ -122,14 +122,14 @@ class RegisterView(BaseView):
         user_by_username = self.User.query.filter_by(
             username=kwargs["username"]).first()
 
-        if user_by_username is not None:
-            flash(self.alerts.USERNAME_ALERT, "danger")
-            return redirect(self.REGISTER_URL)
-
         if self.base_config.EMAIL_UNIQUE:
             if user_by_email is not None:
                 flash(self.alerts.EMAIL_ALERT, "danger")
                 return redirect(self.REGISTER_URL)
+
+        if user_by_username is not None:
+            flash(self.alerts.USERNAME_ALERT, "danger")
+            return redirect(self.REGISTER_URL)
 
         if len(kwargs["password"]) < self.base_config.MIN_PASSWORD_LENGTH:
             flash(
@@ -144,7 +144,7 @@ class RegisterView(BaseView):
         return self.add_new_user(**kwargs)
 
     def add_new_user(self, **kwargs):
-        kwargs['password'] = generate_password_hash(
+        kwargs['password_hash'] = generate_password_hash(
             kwargs['password']
         )
 

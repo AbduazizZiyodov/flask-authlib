@@ -11,7 +11,7 @@ def get_user_model(db: SQLAlchemy, table_name: str):
         id = db.Column(db.Integer, primary_key=True)
         email = db.Column(db.String, nullable=False)
         username = db.Column(db.String, nullable=False)
-        password = db.Column(db.String, nullable=False)
+        password_hash = db.Column(db.String, nullable=False)
         is_admin = db.Column(db.Boolean, default=False)
 
         def insert(self) -> None:
