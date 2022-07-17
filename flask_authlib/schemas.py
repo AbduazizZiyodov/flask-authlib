@@ -1,8 +1,5 @@
-from typing import Optional
-
-from pydantic import EmailStr
-from pydantic import BaseModel
-
+import typing as t
+from pydantic import EmailStr, BaseModel
 
 class RegisterData(BaseModel):
     email: EmailStr
@@ -16,7 +13,7 @@ class LoginData(BaseModel):
 
 
 class User(BaseModel):
-    id: Optional[int]
+    id: t.Optional[int]
     username: str
     email: EmailStr
     password: str

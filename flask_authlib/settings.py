@@ -8,8 +8,6 @@ class BaseConfig:
     REGISTER_URL: str = "/register"
     LOGOUT_URL: str = "/logout"
 
-    BLUEPRINT_NAME: str = "auth"
-
     TEMPLATES_FILE_NAME: str = "templates.zip"
 
     TEMPLATES_FOLDER_NAME: str = "templates"
@@ -19,9 +17,6 @@ class BaseConfig:
 
     TABLENAME: str = "users"
     MIN_PASSWORD_LENGTH: int = 8
-
-    EMAIL_UNIQUE: bool = True
-
 
 class Alerts:
     EMAIL_ALERT: str = "This email is already taken!"
@@ -39,32 +34,6 @@ class Alerts:
     REQUIRED_FIELD: str = "Please, fill in all required fields!"
 
 
-class TemplateConfig:
-    USERNAME_LABEL: str = "Username"
-    PASSWORD_LABEL: str = "Password"
-    EMAIL_LABEL: str = "Email address"
-
-    LOGIN_TITLE: str = "Login"
-    LOGIN_BTN_TEXT: str = "Login"
-    LOGIN_PRIMARY_COLOR: str = "red"
-
-    REGISTER_TITLE: str = "Register"
-    REGISTER_BTN_TEXT: str = "Register"
-    REGISTER_PRIMARY_COLOR: str = "yellow"
-
-
-COLORS: dict = {
-    "blue": "primary",
-    "violet": "secondary",
-    "green": "success",
-    "red": "danger",
-    "yellow": "warning",
-    "light-blue": "info",
-    "white": "light",
-    "black": "dark"
-}
-
-
 class JwtConfig:
     LOGIN_URL: str = "/login"
     REGISTER_URL: str = "/register"
@@ -80,3 +49,31 @@ class JwtConfig:
     alerts: Alerts = Alerts
 
     user_schema: User = User
+
+
+class TemplateConfig:
+    USERNAME_LABEL: str = "Username"
+    PASSWORD_LABEL: str = "Password"
+    EMAIL_LABEL: str = "Email address"
+
+    LOGIN_TITLE: str = "Login"
+    LOGIN_BTN_TEXT: str = "Login"
+    LOGIN_PRIMARY_COLOR: str = "red"
+
+    REGISTER_TITLE: str = "Register"
+    REGISTER_BTN_TEXT: str = "Register"
+    REGISTER_PRIMARY_COLOR: str = "yellow"
+
+    AUTO_REPLACE_FOLDER: bool = True
+
+
+COLORS: dict = {
+    "blue": "primary",
+    "violet": "secondary",
+    "green": "success",
+    "red": "danger",
+    "yellow": "warning",
+    "light-blue": "info",
+    "white": "light",
+    "black": "dark"
+}
