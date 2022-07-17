@@ -1,29 +1,24 @@
 from typing import Any
-
-from flask import flash
-from flask import request
-from flask import redirect
-from flask import render_template
+from flask import (
+    flash,
+    request,
+    redirect,
+    render_template
+)
 from flask.views import MethodView
-
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import login_user, logout_user
+from werkzeug.security import (
+    check_password_hash,
+    generate_password_hash
+)
 
-from flask_login import login_user
-from flask_login import logout_user
-
-from werkzeug.security import check_password_hash
-from werkzeug.security import generate_password_hash
-
-from .utils import validate_form_request
-from .utils import redirect_if_authenticated
-
-from .schemas import LoginData
-from .schemas import RegisterData
-
-from .settings import Alerts
-from .settings import COLORS
-from .settings import BaseConfig
-from .settings import TemplateConfig
+from .settings import *
+from .utils import (
+    validate_form_request,
+    redirect_if_authenticated
+)
+from .schemas import LoginData, RegisterData
 
 
 class BaseView(MethodView):
@@ -33,7 +28,7 @@ class BaseView(MethodView):
     base_config: BaseConfig
     template_config: TemplateConfig
 
-    User: Any
+    UserModel: Any
     HOME_URL: str
     LOGIN_URL: str
     REGISTER_URL: str
@@ -41,6 +36,22 @@ class BaseView(MethodView):
     TEMPLATE_NAME: str
 
     methods = ["GET", "POST"]
+
+    @classmethod
+    def configure(cls, manager: Any) -> None:
+        attrs: list = [
+            "db", "base_config", "alerts",
+            "template_config", "UserModel",
+            "HOME_URL", "LOGIN_URL", "REGISTER_URL"
+        ]
+
+        for attr in attrs:
+            if attr.endswith("URL"):
+                setattr(cls, attr, getattr(cls.base_config, attr))
+            else:
+                setattr(cls, attr, getattr(manager, attr))
+
+        return
 
     @redirect_if_authenticated
     def get(self):
@@ -76,7 +87,7 @@ class BaseView(MethodView):
 
 
 class LoginView(BaseView):
-    TEMPLATE_NAME = 'login.html'
+    TEMPLATE_NAME = "login.html"
 
     @redirect_if_authenticated
     def post(self):
@@ -86,7 +97,7 @@ class LoginView(BaseView):
 
         username, password = request.form["username"], request.form["password"]
 
-        user = self.User.query.filter_by(
+        user = self.UserModel.query.filter_by(
             username=username
         ).first()
 
@@ -102,7 +113,7 @@ class LoginView(BaseView):
 
 
 class RegisterView(BaseView):
-    TEMPLATE_NAME = 'register.html'
+    TEMPLATE_NAME = "register.html"
 
     @redirect_if_authenticated
     def post(self):
@@ -116,16 +127,15 @@ class RegisterView(BaseView):
         )
 
     def validate_registration(self, **kwargs):
-        user_by_email = self.User.query.filter_by(
+        user_by_email = self.UserModel.query.filter_by(
             email=kwargs["email"]).first()
 
-        user_by_username = self.User.query.filter_by(
+        user_by_username = self.UserModel.query.filter_by(
             username=kwargs["username"]).first()
 
-        if self.base_config.EMAIL_UNIQUE:
-            if user_by_email is not None:
-                flash(self.alerts.EMAIL_ALERT, "danger")
-                return redirect(self.REGISTER_URL)
+        if user_by_email is not None:
+            flash(self.alerts.EMAIL_ALERT, "danger")
+            return redirect(self.REGISTER_URL)
 
         if user_by_username is not None:
             flash(self.alerts.USERNAME_ALERT, "danger")
@@ -141,16 +151,14 @@ class RegisterView(BaseView):
             )
             return redirect(self.REGISTER_URL)
 
-        return self.add_new_user(**kwargs)
+        return self.create_user(**kwargs)
 
-    def add_new_user(self, **kwargs):
-        kwargs['password_hash'] = generate_password_hash(
-            kwargs['password']
+    def create_user(self, **kwargs):
+        kwargs["password"] = generate_password_hash(
+            kwargs["password"]
         )
 
-        kwargs.pop("password")
-
-        self.User(**kwargs).insert()
+        self.UserModel(**kwargs).insert()
 
         flash(self.alerts.REGISTER_SUCCESS, "success")
 
@@ -161,8 +169,3 @@ class LogoutView(BaseView):
     def dispatch_request(self):
         logout_user()
         return redirect(self.HOME_URL)
-
-
-__all__ = [
-    "BaseView", "LoginView", "RegisterView", "LogoutView",
-]
