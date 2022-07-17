@@ -1,11 +1,6 @@
+import typing as t
 from os import path
 from shutil import rmtree
-
-from typing import Any
-from typing import List
-from typing import Optional
-from typing import NoReturn
-
 from zipfile import ZipFile
 from distutils.dir_util import copy_tree
 
@@ -14,17 +9,13 @@ from flask import Blueprint
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
-from .views import *
-from .utils import check_table_name
-from .utils import initalize_base_view
-from .utils import set_flask_app_config
-from .utils import add_create_admin_command
-from .utils import get_create_admin_function
+from .utils import (
+    check_table_name,
+    set_flask_app_config
+)
 from .database.models import get_user_model
-
-from .settings import Alerts
-from .settings import BaseConfig
-from .settings import TemplateConfig
+from .settings import BaseConfig, Alerts, TemplateConfig
+from .views import BaseView, LoginView, RegisterView, LogoutView
 
 
 class AuthManager:
@@ -32,33 +23,27 @@ class AuthManager:
         self,
         app: Flask,
         db: SQLAlchemy,
-        alerts: Optional[Alerts] = Alerts,
-        base_config: Optional[BaseConfig] = BaseConfig,
-        template_config: Optional[TemplateConfig] = TemplateConfig,
-        auto_replace_folder: Optional[bool] = True,
-        UserModel: Optional[Any] = None
+        UserModel: t.Optional[t.Any] = None,
+        alerts: t.Optional[Alerts] = Alerts,
+        base_config: t.Optional[BaseConfig] = BaseConfig,
+        template_config: t.Optional[TemplateConfig] = TemplateConfig,
     ) -> None:
-
         self.app, self.db = app, db
-
-        self.auto_replace_folder: bool = auto_replace_folder
-
         self.alerts = alerts
         self.base_config = base_config
         self.template_config = template_config
 
-        self.User = get_user_model(
-            self.db, self.base_config.TABLENAME
-        ) if UserModel is None else UserModel
+        self.UserModel = get_user_model(db, app)\
+            if UserModel is None else UserModel
 
-        self.blueprint_name = self.base_config.BLUEPRINT_NAME
+        self.setup()
 
+    def setup(self) -> t.NoReturn:
+        self.blueprint_name = "auth"
         self.blueprint = Blueprint(
             self.blueprint_name, __name__
         )
-        self.setup()
 
-    def setup(self) -> NoReturn:
         if not check_table_name(
             self.db,
             self.base_config.TABLENAME
@@ -66,9 +51,6 @@ class AuthManager:
             self.db.create_all()
 
         set_flask_app_config(self.app, self.base_config)
-
-        func = get_create_admin_function(self.db, self.base_config)
-        add_create_admin_command(self.app, func)
 
         self.create_templates()
         self.setup_flask_login()
@@ -84,11 +66,10 @@ class AuthManager:
 
         @self.login_manager.user_loader
         def load_user(user_id):
-            return self.User.query.get(user_id)
+            return self.UserModel.query.get(user_id)
 
     def setup_url_rules(self) -> None:
-
-        initalize_base_view(self, BaseView)
+        BaseView.configure(self)
 
         self.blueprint.add_url_rule(
             rule=self.base_config.LOGIN_URL,
@@ -108,7 +89,7 @@ class AuthManager:
         self.app.register_blueprint(self.blueprint)
 
     def create_templates(self) -> None:
-        dirs: List[str] = [
+        dirs: t.List[str] = [
             self.base_config.TEMPLATES_FOLDER_NAME,
             self.base_config.STATIC_FOLDER_NAME
         ]
@@ -124,10 +105,10 @@ class AuthManager:
         ) as zip_archive:
             zip_archive.extractall(self.get_file_or_dir(""))
 
-        if self.auto_replace_folder:
+        if self.template_config.AUTO_REPLACE_FOLDER:
             self.copy_dirs(dirs)
 
-    def copy_dirs(self, dirs: List[str]) -> NoReturn:
+    def copy_dirs(self, dirs: t.List[str]) -> t.NoReturn:
         for dir in dirs:
             copy_tree(
                 self.get_file_or_dir(dir),
