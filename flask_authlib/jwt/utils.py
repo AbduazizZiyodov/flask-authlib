@@ -1,5 +1,5 @@
-import jwt
-
+from jose import jwt
+from jose import exceptions
 from typing import Union
 
 from datetime import datetime
@@ -18,21 +18,23 @@ def encode_jwt(user: User, settings: JwtConfig) -> Union[bytes, None]:
         payload: dict = {
             "exp": datetime.utcnow() + timedelta(seconds=expiration_time),
             "iat": datetime.utcnow(),
-            "sub": user.dict() if settings.USER_INFO_IN_JWT else user.id
+            "sub": str(user.email)
         }
 
         return jwt.encode(payload, secret_key, algorithm="HS256")
 
-    except Exception:
+    except Exception as exc:
+        print(exc)
         raise AuthErrorException("An error occurred!", 500)
 
 
 def decode_jwt(token: str, secret_key: str) -> Union[int, User]:
     try:
         return jwt.decode(token, secret_key, algorithms=["HS256"])["sub"]
-    except jwt.ExpiredSignatureError:
+    except exceptions.ExpiredSignatureError:
         raise AuthErrorException("Token expired. Please log in again", 401)
-    except jwt.InvalidTokenError:
+    except exceptions.JOSEError as exc:
+        print(exc)
         raise AuthErrorException("Invalid token. Please log in again.", 401)
     except Exception:
         raise AuthErrorException("Unable to parse jwt token!", 401)
