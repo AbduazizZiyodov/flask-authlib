@@ -1,21 +1,17 @@
 from typing import Any
-
 from flask import jsonify
 from flask.views import MethodView
 from flask_sqlalchemy import SQLAlchemy
-
-from werkzeug.security import check_password_hash
-from werkzeug.security import generate_password_hash
-
-from ..settings import JwtConfig
-
-from ..schemas import LoginData
-from ..schemas import RegisterData
+from werkzeug.security import (
+    check_password_hash,
+    generate_password_hash
+)
 
 from .utils import encode_jwt
+from ..settings import JwtConfig
 from ..utils import validate_json_request
-
 from .exceptions import AuthErrorException
+from ..schemas import LoginData, RegisterData
 
 
 class BaseJwtView(MethodView):
@@ -24,15 +20,22 @@ class BaseJwtView(MethodView):
     app_config: dict
     settings: JwtConfig
 
+    @classmethod
+    def configure(cls, manager: Any) -> None:
+        for attr in ["db", "UserModel", "settings"]:
+            setattr(cls, attr, getattr(manager, attr))
+
+        cls.app_config = manager.app.config
+
 
 class JWTRegister(BaseJwtView):
     @validate_json_request(RegisterData)
     def post(self, data: RegisterData):
-        user_by_email = self.User.query.filter_by(
+        user_by_email = self.UserModel.query.filter_by(
             email=data.email
         ).first()
 
-        user_by_username = self.User.query.filter_by(
+        user_by_username = self.UserModel.query.filter_by(
             username=data.username
         ).first()
 
@@ -50,7 +53,7 @@ class JWTRegister(BaseJwtView):
                 400
             )
         data.password = generate_password_hash(data.password)
-        self.User(**data.dict()).insert()
+        self.UserModel(**data.dict()).insert()
 
         return jsonify(
             success=True,
@@ -61,7 +64,7 @@ class JWTRegister(BaseJwtView):
 class JWTLogin(BaseJwtView):
     @validate_json_request(LoginData)
     def post(self, data: LoginData):
-        user = self.User.query.filter_by(
+        user = self.UserModel.query.filter_by(
             username=data.username
         ).first()
 
